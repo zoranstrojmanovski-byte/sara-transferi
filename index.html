@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sara Fesn - Централна Евиденција на Трансфери (Realtime)</title>
+    
+    <!-- Firebase SDK Compat -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --success: #16a34a;
+            --warning: #ca8a04;
+            --danger: #dc2626;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --border: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            margin-bottom: 20px;
+        }
+
+        @media(min-width: 768px) {
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .controls-top {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .control-group label {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #64748b;
+        }
+
+        select, input[type="text"], input[type="number"], input[type="date"], input[type="password"] {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            font-size: 0.95rem;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgb(0 0 0 / 0.05);
+            border-left: 5px solid var(--primary);
+        }
+
+        .stat-card.notified { border-left-color: var(--warning); }
+        .stat-card.transit { border-left-color: var(--primary); }
+        .stat-card.completed { border-left-color: var(--success); }
+
+        .stat-card h3 {
+            margin: 0 0 5px 0;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .stat-card .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn:hover { background: #1d4ed8; }
+        .btn-sm { padding: 5px 10px; font-size: 0.8rem; }
+        .btn-danger { background: var(--danger); }
+        .btn-danger:hover { background: #b91c1c; }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+            min-width: 950px;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f1f5f9;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        tr.completed-row { background-color: #f0fdf4 !important; }
+        tr.completed-row td { color: #166534; font-weight: 500; }
+
+        .table-input {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .locked-field {
+            background-color: #f1f5f9;
+            color: #64748b;
+            cursor: not-allowed;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .badge-notified { background: #fef9c3; color: #854d0e; }
+        .badge-transit { background: #e0f2fe; color: #0369a1; }
+        .badge-completed { background: #dcfce7; color: #166534; }
+
+        .actions-cell { display: flex; gap: 5px; }
+        .shop-management { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+
+        .filter-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1>Sara Fesn - Управување со Трансфери (Cloud)</h1>
+            <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #64748b;">Синхронизација во реално време за 70 локации</p>
+        </div>
+        <div class="controls-top">
+            <div class="control-group">
+                <label for="currentRole">Тековна улога:</label>
+                <select id="currentRole" onchange="changeRole()">
+                    <option value="sender">Испраќач (Продавница)</option>
+                    <option value="warehouse">Магационер</option>
+                    <option value="receiver">Примач (Продавница)</option>
+                    <option value="admin">Администратор (Заштитено со PIN)</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Panel -->
+    <div class="card" id="adminShopCard" style="display: none;">
+        <h2>Администрација: Продавници и PIN лозинка</h2>
+        <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <h3 style="margin-top: 0; font-size: 1rem; color: #334155;">Промена на Администраторски PIN</h3>
+            <div class="shop-management">
+                <input type="password" id="newAdminPin" placeholder="Внеси нов PIN..." style="flex: 1; min-width: 200px;">
+                <button class="btn" onclick="updateAdminPin()">Смени PIN лозинка</button>
+            </div>
+        </div>
+        <h3 style="margin-top: 0; font-size: 1rem; color: #334155;">Управување со продавници</h3>
+        <div class="shop-management">
+            <input type="text" id="newShopName" placeholder="Внеси нов дуќан или магацин..." style="flex: 1; min-width: 200px;">
+            <button class="btn" onclick="addNewShop()">Додај нов дуќан</button>
+        </div>
+        <div id="shopListContainer" style="font-size: 0.9rem; color: #475569; display: flex; flex-wrap: wrap; gap: 8px;"></div>
+    </div>
+
+    <!-- Dashboard Stats -->
+    <div class="dashboard-grid">
+        <div class="stat-card">
+            <h3>Вкупно трансфери</h3>
+            <div class="value" id="statTotal">0</div>
+        </div>
+        <div class="stat-card notified">
+            <h3>Најавени</h3>
+            <div class="value" id="statNotified">0</div>
+        </div>
+        <div class="stat-card transit">
+            <h3>Во транзит</h3>
+            <div class="value" id="statTransit">0</div>
+        </div>
+        <div class="stat-card completed">
+            <h3>Завршени</h3>
+            <div class="value" id="statCompleted">0</div>
+        </div>
+    </div>
+
+    <!-- New Transfer Form -->
+    <div class="card" id="newTransferCard">
+        <h2>Креирај нов најавен трансфер (Испраќач)</h2>
+        <form id="transferForm" onsubmit="addNewTransfer(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-items: end;">
+            <div>
+                <label>Од дуќан (Испраќач):</label>
+                <select id="senderShop" required class="table-input">
+                    <option value="">Избери дуќан...</option>
+                </select>
+            </div>
+            <div>
+                <label>Кон дуќан/Примач:</label>
+                <select id="receiverName" required class="table-input">
+                    <option value="">Избери примач...</option>
+                </select>
+            </div>
+            <div>
+                <label>Број на документ:</label>
+                <input type="text" id="docNumber" required placeholder="пр. ТР-1025">
+            </div>
+            <div>
+                <label>Број на пакети:</label>
+                <input type="number" id="packageCount" required min="1" placeholder="пр. 5">
+            </div>
+            <div>
+                <label>Возач:</label>
+                <input type="text" id="driverName" required placeholder="пр. Марјан Возач">
+            </div>
+            <div>
+                <button type="submit" class="btn" style="width: 100%;">Зачувај најава</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Main Table & Filters -->
+    <div class="card">
+        <h2>Преглед на трансфери и филтрирање</h2>
+        <div class="filter-section">
+            <div class="control-group">
+                <label for="filterShop">Избери дуќан:</label>
+                <select id="filterShop" onchange="renderTable()">
+                    <option value="ALL">Сите продавници</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="filterType">Тип на приказ:</label>
+                <select id="filterType" onchange="renderTable()">
+                    <option value="both">Испратени и Примени</option>
+                    <option value="sent">Само Испратени</option>
+                    <option value="received">Само Примени</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="dateFrom">Од датум:</label>
+                <input type="date" id="dateFrom" onchange="renderTable()">
+            </div>
+            <div class="control-group">
+                <label for="dateTo">До датум:</label>
+                <input type="date" id="dateTo" onchange="renderTable()">
+            </div>
+            <div class="control-group" style="justify-content: flex-end;">
+                <button class="btn btn-sm" onclick="resetFilters()" style="margin-top: auto;">Ресетирај филтри</button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Статус</th>
+                        <th>Испраќач (Од кого)</th>
+                        <th>Примач (Кон кого)</th>
+                        <th>Бр. Документ</th>
+                        <th>Бр. Пакети</th>
+                        <th>Возач</th>
+                        <th>Датум на предавање</th>
+                        <th>Прием во магацин</th>
+                        <th>Испратено од магацин</th>
+                        <th>Потврда прием</th>
+                        <th>Акции</th>
+                    </tr>
+                </thead>
+                <tbody id="transferTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- FIREBASE KONFIGURACIJA ---
+    const firebaseConfig = {
+        apiKey: "AIzaSyA2ImjoxFoUBoXPOLQ1Mnhl6EW5FW2MxHQ",
+        authDomain: "sarafashion-transferi.firebaseapp.com",
+        databaseURL: "https://sarafashion-transferi-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "sarafashion-transferi",
+        storageBucket: "sarafashion-transferi.appspot.com",
+        messagingSenderId: "139905470212",
+        appId: "1:139905470212:web:c25a80709ed3bc434c8a51"
+    };
+
+    // Inicializacija na Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    let shops = ['Дуќан Центар', 'Дуќан Карпош', 'Дуќан Аеродром', 'Централен Магацин'];
+    let transfers = [];
+    let adminPin = "1234";
+
+    // Slusaj za promeni vo realno vreme od baza
+    db.ref('shops').on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            shops = data;
+        } else {
+            db.ref('shops').set(shops);
+        }
+        renderShopSelectors();
+    });
+
+    db.ref('adminPin').on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            adminPin = data;
+        } else {
+            db.ref('adminPin').set(adminPin);
+        }
+    });
+
+    db.ref('transfers').on('value', (snapshot) => {
+        const data = snapshot.val();
+        transfers = [];
+        if (data) {
+            Object.keys(data).forEach(key => {
+                transfers.push({ firebaseId: key, ...data[key] });
+            });
+        }
+        renderTable();
+        updateStats();
+    });
+
+    function getCurrentDateTime() {
+        const now = new Date();
+        return now.toLocaleDateString('mk-MK') + ' ' + now.toLocaleTimeString('mk-MK', {hour: '2-digit', minute:'2-digit'});
+    }
+
+    function getUserRole() {
+        return document.getElementById('currentRole').value;
+    }
+
+    function changeRole() {
+        const roleSelect = document.getElementById('currentRole');
+        let role = roleSelect.value;
+
+        if (role === 'admin') {
+            const enteredPin = prompt("Внесете администраторски PIN:");
+            if (enteredPin !== adminPin) {
+                alert("Погрешен PIN! Пристапот е одбиен.");
+                roleSelect.value = "sender";
+                changeRole();
+                return;
+            }
+        }
+
+        const formCard = document.getElementById('newTransferCard');
+        const adminCard = document.getElementById('adminShopCard');
+        
+        if (role === 'admin') {
+            adminCard.style.display = 'block';
+            formCard.style.display = 'block';
+        } else if (role === 'sender') {
+            adminCard.style.display = 'none';
+            formCard.style.display = 'block';
+        } else {
+            adminCard.style.display = 'none';
+            formCard.style.display = 'none';
+        }
+        renderShopSelectors();
+        renderTable();
+    }
+
+    function updateAdminPin() {
+        const newPinInput = document.getElementById('newAdminPin');
+        const newPin = newPinInput.value.trim();
+        if (!newPin) {
+            alert('Ве молиме внесете нов PIN!');
+            return;
+        }
+
+        db.ref('adminPin').set(newPin).then(() => {
+            newPinInput.value = '';
+            alert('Успешно е променета администраторската PIN лозинка во базата!');
+        });
+    }
+
+    function renderShopSelectors() {
+        const filterSelect = document.getElementById('filterShop');
+        const senderSelect = document.getElementById('senderShop');
+        const receiverSelect = document.getElementById('receiverName');
+        const shopListContainer = document.getElementById('shopListContainer');
+
+        const currentFilter = filterSelect.value;
+        const currentSender = senderSelect.value;
+        const currentReceiver = receiverSelect.value;
+
+        filterSelect.innerHTML = '<option value="ALL">Сите продавници</option>';
+        senderSelect.innerHTML = '<option value="">Избери дуќан...</option>';
+        receiverSelect.innerHTML = '<option value="">Избери примач...</option>';
+        if (shopListContainer) shopListContainer.innerHTML = '';
+
+        shops.forEach(shop => {
+            filterSelect.innerHTML += `<option value="${shop}">${shop}</option>`;
+            senderSelect.innerHTML += `<option value="${shop}">${shop}</option>`;
+            receiverSelect.innerHTML += `<option value="${shop}">${shop}</option>`;
+
+            if (shopListContainer) {
+                shopListContainer.innerHTML += `
+                    <span style="background: #e2e8f0; padding: 5px 10px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px;">
+                        ${shop} 
+                        <button onclick="deleteShop('${shop}')" style="border:none; background:none; color: red; cursor:pointer; font-weight:bold;">&times;</button>
+                    </span>
+                `;
+            }
+        });
+
+        filterSelect.value = shops.includes(currentFilter) ? currentFilter : 'ALL';
+        senderSelect.value = currentSender;
+        receiverSelect.value = currentReceiver;
+    }
+
+    function addNewShop() {
+        const input = document.getElementById('newShopName');
+        const shopName = input.value.trim();
+        if (!shopName) return;
+
+        if (shops.includes(shopName)) {
+            alert('Овој дуќан веќе постои!');
+            return;
+        }
+
+        shops.push(shopName);
+        db.ref('shops').set(shops).then(() => {
+            input.value = '';
+            alert('Успешно внесен нов дуќан во базата!');
+        });
+    }
+
+    function deleteShop(shopName) {
+        if (confirm(`Дали сте сигурни дека сакате да го избришете дуќанот "${shopName}"?`)) {
+            shops = shops.filter(s => s !== shopName);
+            db.ref('shops').set(shops);
+        }
+    }
+
+    function addNewTransfer(event) {
+        event.preventDefault();
+        const role = getUserRole();
+        if (role !== 'sender' && role !== 'admin') {
+            alert('Само испраќач или администратор можат да креираат нов трансфер!');
+            return;
+        }
+
+        const senderShop = document.getElementById('senderShop').value;
+        const receiverName = document.getElementById('receiverName').value;
+
+        if (senderShop === receiverName) {
+            alert('Испраќачот и примачот не можат да бидат ист дуќан!');
+            return;
+        }
+
+        const now = new Date();
+        const newTx = {
+            id: Date.now(),
+            rawDate: now.toISOString().split('T')[0],
+            senderShop: senderShop,
+            receiverName: receiverName,
+            docNumber: document.getElementById('docNumber').value,
+            packageCount: document.getElementById('packageCount').value,
+            driverName: document.getElementById('driverName').value,
+            dispatchDate: getCurrentDateTime(),
+            warehouseReceive: '',
+            warehouseDispatch: '',
+            receiverConfirm: '',
+            status: 'Најавен'
+        };
+
+        db.ref('transfers').push(newTx).then(() => {
+            document.getElementById('transferForm').reset();
+        });
+    }
+
+    function updateField(firebaseId, field, value) {
+        const role = getUserRole();
+        const tx = transfers.find(t => t.firebaseId === firebaseId);
+        if (!tx) return;
+
+        let updates = {};
+
+        if (field === 'warehouseReceive' || field === 'warehouseDispatch') {
+            if (role !== 'warehouse' && role !== 'admin') {
+                alert('Само магационер може да ги пополнува овие полиња!');
+                renderTable();
+                return;
+            }
+            if (field === 'warehouseReceive' && value === 'Примено') {
+                updates.warehouseReceive = 'Примено (' + getCurrentDateTime() + ')';
+            } else {
+                updates.warehouseReceive = value;
+            }
+            if (field === 'warehouseDispatch') {
+                updates.warehouseDispatch = value + ' (' + getCurrentDateTime() + ')';
+                updates.status = 'Во транзит';
+            }
+        }
+
+        if (field === 'receiverConfirm') {
+            if (role !== 'receiver' && role !== 'admin') {
+                alert('Само примачот може да потврди прием!');
+                renderTable();
+                return;
+            }
+            if (value) {
+                updates.receiverConfirm = getCurrentDateTime();
+                updates.status = 'Завршен';
+            } else {
+                updates.receiverConfirm = '';
+                updates.status = 'Во транзит';
+            }
+        }
+
+        db.ref('transfers/' + firebaseId).update(updates);
+    }
+
+    function deleteTransfer(firebaseId) {
+        const role = getUserRole();
+        if (role !== 'admin') {
+            alert('Само администраторот може да брише трансфери!');
+            return;
+        }
+        if (confirm('Дали сте сигурни дека сакате да го избришете овој трансфер?')) {
+            db.ref('transfers/' + firebaseId).remove();
+        }
+    }
+
+    function resetFilters() {
+        document.getElementById('filterShop').value = 'ALL';
+        document.getElementById('filterType').value = 'both';
+        document.getElementById('dateFrom').value = '';
+        document.getElementById('dateTo').value = '';
+        renderTable();
+    }
+
+    function getFilteredTransfers() {
+        const selectedShop = document.getElementById('filterShop').value;
+        const filterType = document.getElementById('filterType').value;
+        const dateFrom = document.getElementById('dateFrom').value;
+        const dateTo = document.getElementById('dateTo').value;
+
+        return transfers.filter(t => {
+            let shopMatch = true;
+            if (selectedShop !== 'ALL') {
+                if (filterType === 'sent') {
+                    shopMatch = (t.senderShop === selectedShop);
+                } else if (filterType === 'received') {
+                    shopMatch = (t.receiverName === selectedShop);
+                } else {
+                    shopMatch = (t.senderShop === selectedShop || t.receiverName === selectedShop);
+                }
+            }
+
+            let dateMatch = true;
+            if (t.rawDate) {
+                if (dateFrom && t.rawDate < dateFrom) dateMatch = false;
+                if (dateTo && t.rawDate > dateTo) dateMatch = false;
+            }
+
+            return shopMatch && dateMatch;
+        });
+    }
+
+    function updateStats() {
+        const filtered = getFilteredTransfers();
+        document.getElementById('statTotal').innerText = filtered.length;
+        document.getElementById('statNotified').innerText = filtered.filter(t => t.status === 'Најавен').length;
+        document.getElementById('statTransit').innerText = filtered.filter(t => t.status === 'Во транзит').length;
+        document.getElementById('statCompleted').innerText = filtered.filter(t => t.status === 'Завршен').length;
+    }
+
+    function renderTable() {
+        const role = getUserRole();
+        const tbody = document.getElementById('transferTableBody');
+        tbody.innerHTML = '';
+
+        const filtered = getFilteredTransfers();
+
+        if (filtered.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="11" style="text-align: center; color: #64748b;">Нема пронајдено трансфери за избраните филтри и период.</td></tr>`;
+            updateStats();
+            return;
+        }
+
+        filtered.forEach(tx => {
+            const isCompleted = tx.status === 'Завршен';
+            const rowClass = isCompleted ? 'completed-row' : '';
+            
+            let badgeClass = 'badge-notified';
+            if (tx.status === 'Во транзит') badgeClass = 'badge-transit';
+            if (tx.status === 'Завршен') badgeClass = 'badge-completed';
+
+            const canEditWarehouse = (role === 'warehouse' || role === 'admin') && !isCompleted;
+            const canEditReceiver = (role === 'receiver' || role === 'admin');
+
+            const tr = document.createElement('tr');
+            tr.className = rowClass;
+
+            tr.innerHTML = `
+                <td><span class="badge ${badgeClass}">${tx.status}</span></td>
+                <td><strong>${tx.senderShop}</strong></td>
+                <td><strong>${tx.receiverName}</strong></td>
+                <td><strong>${tx.docNumber}</strong></td>
+                <td>${tx.packageCount}</td>
+                <td>${tx.driverName}</td>
+                <td><small>${tx.dispatchDate}</small></td>
+                <td>
+                    <select class="table-input ${!canEditWarehouse ? 'locked-field' : ''}" ${!canEditWarehouse ? 'disabled' : ''} onchange="updateField('${tx.firebaseId}', 'warehouseReceive', this.value)">
+                        <option value="">Избери...</option>
+                        <option value="Примено" ${tx.warehouseReceive && tx.warehouseReceive.startsWith('Примено') ? 'selected' : ''}>Примено</option>
+                    </select>
+                    ${tx.warehouseReceive ? `<br><small>${tx.warehouseReceive}</small>` : ''}
+                </td>
+                <td>
+                    <input type="text" class="table-input ${!canEditWarehouse ? 'locked-field' : ''}" ${!canEditWarehouse ? 'disabled' : ''} value="${tx.warehouseDispatch || ''}" placeholder="Испратено по возач..." onchange="updateField('${tx.firebaseId}', 'warehouseDispatch', this.value)">
+                </td>
+                <td>
+                    <label style="display: flex; align-items: center; gap: 5px; cursor: ${canEditReceiver ? 'pointer' : 'not-allowed'}">
+                        <input type="checkbox" ${tx.receiverConfirm ? 'checked' : ''} ${!canEditReceiver ? 'disabled' : ''} onchange="updateField('${tx.firebaseId}', 'receiverConfirm', this.checked)">
+                        <span style="font-size: 0.85rem;">${tx.receiverConfirm ? 'Примено (' + tx.receiverConfirm + ')' : 'Чека потврда'}</span>
+                    </label>
+                </td>
+                <td class="actions-cell">
+                    ${role === 'admin' ? `<button class="btn btn-danger btn-sm" onclick="deleteTransfer('${tx.firebaseId}')">Избриши</button>` : '<small>Увид</small>'}
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        updateStats();
+    }
+</script>
+
+</body>
+</html>
