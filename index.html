@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sara Fesn - Централна Евиденција на Трансфери (Realtime)</title>
+    <title>Sara Fashion - Централна Евиденција на Трансфери (Realtime)</title>
     
+    <!-- PWA Manifest & Custom Black/Pink Icon -->
+    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Sara%20Fashion%20Transferi%22%2C%22short_name%22%3A%22SaraFashion%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23000000%22%2C%22theme_color%22%3A%22%23ff1493%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.svgopen.org%2Fsvg%2F2007%2F07%2Fsvg-1.0.dtd%27%20width%3D%27512%27%20height%3D%27512%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23000000%27%2F%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20fill%3D%27%23ff1493%27%20font-size%3D%2770%27%20font-family%3D%27Arial%2C%20sans-serif%27%20font-weight%3D%27bold%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%3ESARA%3C%2Ftext%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2765%25%27%20fill%3D%27%23ff1493%27%20font-size%3D%2750%27%20font-family%3D%27Arial%2C%20sans-serif%27%20font-weight%3D%27bold%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%3EFASHION%3C%2Ftext%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512'><rect width='100%' height='100%' fill='%23000000'/><text x='50%' y='50%' fill='%23ff1493' font-size='70' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>SARA</text><text x='50%' y='65%' fill='%23ff1493' font-size='50' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>FASHION</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512'><rect width='100%' height='100%' fill='%23000000'/><text x='50%' y='50%' fill='%23ff1493' font-size='70' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>SARA</text><text x='50%' y='65%' fill='%23ff1493' font-size='50' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>FASHION</text></svg>">
+
     <!-- Firebase SDK Compat -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
     <style>
         :root {
-            --primary: #2563eb;
+            --primary: #ff1493;
+            --primary-dark: #d80b7c;
             --success: #16a34a;
             --warning: #ca8a04;
             --danger: #dc2626;
@@ -145,10 +151,12 @@
             transition: background 0.2s;
         }
 
-        .btn:hover { background: #1d4ed8; }
+        .btn:hover { background: var(--primary-dark); }
         .btn-sm { padding: 5px 10px; font-size: 0.8rem; }
         .btn-danger { background: var(--danger); }
         .btn-danger:hover { background: #b91c1c; }
+        .btn-warning { background: var(--warning); color: white; }
+        .btn-warning:hover { background: #a16207; }
 
         .table-responsive {
             width: 100%;
@@ -202,7 +210,7 @@
         .badge-transit { background: #e0f2fe; color: #0369a1; }
         .badge-completed { background: #dcfce7; color: #166534; }
 
-        .actions-cell { display: flex; gap: 5px; }
+        .actions-cell { display: flex; gap: 5px; flex-wrap: wrap; }
         .shop-management { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
 
         .filter-section {
@@ -215,6 +223,27 @@
             margin-bottom: 20px;
             border: 1px solid var(--border);
         }
+
+        /* Modal / Pop-up Stil */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 550px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
@@ -222,8 +251,8 @@
 <div class="container">
     <header>
         <div>
-            <h1>Sara Fesn - Управување со Трансфери (Cloud)</h1>
-            <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #64748b;">Синхронизација во реално време за 70 локации</p>
+            <h1>Sara Fashion - Управување со Трансфери (Cloud)</h1>
+            <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #64748b;">Синхронизација во реално време за 70 локации (Админ контрола)</p>
         </div>
         <div class="controls-top">
             <div class="control-group">
@@ -355,7 +384,7 @@
                         <th>Прием во магацин</th>
                         <th>Испратено од магацин</th>
                         <th>Потврда прием</th>
-                        <th>Акции</th>
+                        <th>Акции (Админ / Увид)</th>
                     </tr>
                 </thead>
                 <tbody id="transferTableBody"></tbody>
@@ -364,8 +393,62 @@
     </div>
 </div>
 
+<!-- Modal za Admin Izmeni -->
+<div id="adminModal" class="modal-overlay">
+    <div class="modal-content">
+        <h2 style="margin-top: 0; color: var(--primary);">Админ корекција на трансфер</h2>
+        <input type="hidden" id="modalFirebaseId">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div>
+                <label style="font-size: 0.85rem; font-weight: bold;">Статус:</label>
+                <select id="modalStatus" class="table-input">
+                    <option value="Најавен">Најавен</option>
+                    <option value="Во транзит">Во транзит</option>
+                    <option value="Завршен">Завршен</option>
+                </select>
+            </div>
+            <div>
+                <label style="font-size: 0.85rem; font-weight: bold;">Испраќач:</label>
+                <select id="modalSender" class="table-input"></select>
+            </div>
+            <div>
+                <label style="font-size: 0.85rem; font-weight: bold;">Примач:</label>
+                <select id="modalReceiver" class="table-input"></select>
+            </div>
+            <div>
+                <label style="font-size: 0.85rem; font-weight: bold;">Број на документ:</label>
+                <input type="text" id="modalDocNumber" class="table-input">
+            </div>
+            <div>
+                <label style="font-size: 0.85rem; font-weight: bold;">Број на пакети:</label>
+                <input type="number" id="modalPackageCount" class="table-input">
+            </div>
+            <div>
+                <label style="font-size: 0.85rem; font-weight: bold;">Возач:</label>
+                <input type="text" id="modalDriverName" class="table-input">
+            </div>
+            <div>
+                <label style="font-size: 0.85rem; font-weight: bold;">Прием во магацин:</label>
+                <input type="text" id="modalWarehouseReceive" class="table-input" placeholder="пр. Примено (04.11.2026 12:00)">
+            </div>
+            <div>
+                <label style="font-size: 0.85rem; font-weight: bold;">Испратено од магацин:</label>
+                <input type="text" id="modalWarehouseDispatch" class="table-input" placeholder="пр. Испратено по возач...">
+            </div>
+            <div>
+                <label style="font-size: 0.85rem; font-weight: bold;">Потврда прием од примач:</label>
+                <input type="text" id="modalReceiverConfirm" class="table-input" placeholder="пр. 04.11.2026 14:30 (или празно)">
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <button class="btn" style="flex: 1;" onclick="saveModalEdit()">Зачувај измени</button>
+                <button class="btn btn-danger" style="flex: 1;" onclick="closeModal()">Откажи</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    // --- FIREBASE KONFIGURACIJA ---
     const firebaseConfig = {
         apiKey: "AIzaSyA2ImjoxFoUBoXPOLQ1Mnhl6EW5FW2MxHQ",
         authDomain: "sarafashion-transferi.firebaseapp.com",
@@ -376,21 +459,21 @@
         appId: "1:139905470212:web:c25a80709ed3bc434c8a51"
     };
 
-    // Inicializacija na Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    let shops = ['Дуќан Центар', 'Дуќан Карпош', 'Дуќан Аеродром', 'Централен Магацин'];
+    let defaultShops = ['Дуќан Центар', 'Дуќан Карпош', 'Дуќан Аеродром', 'Централен Магацин'];
+    let shops = [];
     let transfers = [];
     let adminPin = "1234";
 
-    // Slusaj za promeni vo realno vreme od baza
     db.ref('shops').on('value', (snapshot) => {
         const data = snapshot.val();
-        if (data) {
+        if (data && Array.isArray(data)) {
             shops = data;
         } else {
-            db.ref('shops').set(shops);
+            db.ref('shops').set(defaultShops);
+            shops = defaultShops;
         }
         renderShopSelectors();
     });
@@ -439,6 +522,7 @@
             }
         }
 
+        closeModal();
         const formCard = document.getElementById('newTransferCard');
         const adminCard = document.getElementById('adminShopCard');
         
@@ -476,19 +560,19 @@
         const receiverSelect = document.getElementById('receiverName');
         const shopListContainer = document.getElementById('shopListContainer');
 
-        const currentFilter = filterSelect.value;
-        const currentSender = senderSelect.value;
-        const currentReceiver = receiverSelect.value;
+        const currentFilter = filterSelect ? filterSelect.value : 'ALL';
+        const currentSender = senderSelect ? senderSelect.value : '';
+        const currentReceiver = receiverSelect ? receiverSelect.value : '';
 
-        filterSelect.innerHTML = '<option value="ALL">Сите продавници</option>';
-        senderSelect.innerHTML = '<option value="">Избери дуќан...</option>';
-        receiverSelect.innerHTML = '<option value="">Избери примач...</option>';
+        if (filterSelect) filterSelect.innerHTML = '<option value="ALL">Сите продавници</option>';
+        if (senderSelect) senderSelect.innerHTML = '<option value="">Избери дуќан...</option>';
+        if (receiverSelect) receiverSelect.innerHTML = '<option value="">Избери примач...</option>';
         if (shopListContainer) shopListContainer.innerHTML = '';
 
         shops.forEach(shop => {
-            filterSelect.innerHTML += `<option value="${shop}">${shop}</option>`;
-            senderSelect.innerHTML += `<option value="${shop}">${shop}</option>`;
-            receiverSelect.innerHTML += `<option value="${shop}">${shop}</option>`;
+            if (filterSelect) filterSelect.innerHTML += `<option value="${shop}">${shop}</option>`;
+            if (senderSelect) senderSelect.innerHTML += `<option value="${shop}">${shop}</option>`;
+            if (receiverSelect) receiverSelect.innerHTML += `<option value="${shop}">${shop}</option>`;
 
             if (shopListContainer) {
                 shopListContainer.innerHTML += `
@@ -500,9 +584,9 @@
             }
         });
 
-        filterSelect.value = shops.includes(currentFilter) ? currentFilter : 'ALL';
-        senderSelect.value = currentSender;
-        receiverSelect.value = currentReceiver;
+        if (filterSelect) filterSelect.value = shops.includes(currentFilter) ? currentFilter : 'ALL';
+        if (senderSelect) senderSelect.value = currentSender;
+        if (receiverSelect) receiverSelect.value = currentReceiver;
     }
 
     function addNewShop() {
@@ -518,7 +602,7 @@
         shops.push(shopName);
         db.ref('shops').set(shops).then(() => {
             input.value = '';
-            alert('Успешно внесен нов дуќан во базата!');
+            alert('Успешно внесен нов дуќан во централната база!');
         });
     }
 
@@ -563,6 +647,7 @@
 
         db.ref('transfers').push(newTx).then(() => {
             document.getElementById('transferForm').reset();
+            alert('Трансферот е успешно зачуван!');
         });
     }
 
@@ -572,6 +657,24 @@
         if (!tx) return;
 
         let updates = {};
+
+        if (role !== 'admin') {
+            if (field === 'warehouseReceive' && tx.warehouseReceive) {
+                alert('Ова поле веќе е потврдено и заклучено!');
+                renderTable();
+                return;
+            }
+            if (field === 'warehouseDispatch' && tx.warehouseDispatch) {
+                alert('Ова поле веќе е испратено и заклучено!');
+                renderTable();
+                return;
+            }
+            if (field === 'receiverConfirm' && tx.receiverConfirm) {
+                alert('Приемот веќе е потврден и заклучен!');
+                renderTable();
+                return;
+            }
+        }
 
         if (field === 'warehouseReceive' || field === 'warehouseDispatch') {
             if (role !== 'warehouse' && role !== 'admin') {
@@ -606,6 +709,75 @@
         }
 
         db.ref('transfers/' + firebaseId).update(updates);
+    }
+
+    function openAdminModal(firebaseId) {
+        if (getUserRole() !== 'admin') {
+            alert('Само администратор може да го уредува трансферот!');
+            return;
+        }
+        const tx = transfers.find(t => t.firebaseId === firebaseId);
+        if (!tx) return;
+
+        document.getElementById('modalFirebaseId').value = firebaseId;
+        document.getElementById('modalStatus').value = tx.status;
+        document.getElementById('modalDocNumber').value = tx.docNumber;
+        document.getElementById('modalPackageCount').value = tx.packageCount;
+        document.getElementById('modalDriverName').value = tx.driverName;
+        document.getElementById('modalWarehouseReceive').value = tx.warehouseReceive || '';
+        document.getElementById('modalWarehouseDispatch').value = tx.warehouseDispatch || '';
+        document.getElementById('modalReceiverConfirm').value = tx.receiverConfirm || '';
+
+        let senderSel = document.getElementById('modalSender');
+        let receiverSel = document.getElementById('modalReceiver');
+        senderSel.innerHTML = '';
+        receiverSel.innerHTML = '';
+
+        shops.forEach(s => {
+            senderSel.innerHTML += `<option value="${s}" ${s === tx.senderShop ? 'selected' : ''}>${s}</option>`;
+            receiverSel.innerHTML += `<option value="${s}" ${s === tx.receiverName ? 'selected' : ''}>${s}</option>`;
+        });
+
+        document.getElementById('adminModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('adminModal').style.display = 'none';
+    }
+
+    function saveModalEdit() {
+        const firebaseId = document.getElementById('modalFirebaseId').value;
+        const senderShop = document.getElementById('modalSender').value;
+        const receiverName = document.getElementById('modalReceiver').value;
+        const docNumber = document.getElementById('modalDocNumber').value;
+        const packageCount = document.getElementById('modalPackageCount').value;
+        const driverName = document.getElementById('modalDriverName').value;
+        const status = document.getElementById('modalStatus').value;
+        const warehouseReceive = document.getElementById('modalWarehouseReceive').value;
+        const warehouseDispatch = document.getElementById('modalWarehouseDispatch').value;
+        const receiverConfirm = document.getElementById('modalReceiverConfirm').value;
+
+        if (senderShop === receiverName) {
+            alert('Испраќачот и примачот не можат да бидат ист дуќан!');
+            return;
+        }
+
+        const updates = {
+            senderShop: senderShop,
+            receiverName: receiverName,
+            docNumber: docNumber,
+            packageCount: packageCount,
+            driverName: driverName,
+            status: status,
+            warehouseReceive: warehouseReceive,
+            warehouseDispatch: warehouseDispatch,
+            receiverConfirm: receiverConfirm
+        };
+
+        db.ref('transfers/' + firebaseId).update(updates).then(() => {
+            closeModal();
+            alert('Администраторските измени се успешно зачувани!');
+        });
     }
 
     function deleteTransfer(firebaseId) {
@@ -684,8 +856,13 @@
             if (tx.status === 'Во транзит') badgeClass = 'badge-transit';
             if (tx.status === 'Завршен') badgeClass = 'badge-completed';
 
-            const canEditWarehouse = (role === 'warehouse' || role === 'admin') && !isCompleted;
-            const canEditReceiver = (role === 'receiver' || role === 'admin');
+            const isWarehouseReceivedFilled = tx.warehouseReceive && tx.warehouseReceive !== '';
+            const isWarehouseDispatchedFilled = tx.warehouseDispatch && tx.warehouseDispatch !== '';
+            const isReceiverConfirmed = tx.receiverConfirm && tx.receiverConfirm !== '';
+
+            const canEditWarehouseReceive = (role === 'warehouse' || role === 'admin') && !isWarehouseReceivedFilled;
+            const canEditWarehouseDispatch = (role === 'warehouse' || role === 'admin') && !isWarehouseDispatchedFilled;
+            const canEditReceiver = (role === 'receiver' || role === 'admin') && !isReceiverConfirmed;
 
             const tr = document.createElement('tr');
             tr.className = rowClass;
@@ -699,23 +876,26 @@
                 <td>${tx.driverName}</td>
                 <td><small>${tx.dispatchDate}</small></td>
                 <td>
-                    <select class="table-input ${!canEditWarehouse ? 'locked-field' : ''}" ${!canEditWarehouse ? 'disabled' : ''} onchange="updateField('${tx.firebaseId}', 'warehouseReceive', this.value)">
+                    <select class="table-input ${!canEditWarehouseReceive ? 'locked-field' : ''}" ${!canEditWarehouseReceive ? 'disabled' : ''} onchange="updateField('${tx.firebaseId}', 'warehouseReceive', this.value)">
                         <option value="">Избери...</option>
-                        <option value="Примено" ${tx.warehouseReceive && tx.warehouseReceive.startsWith('Примено') ? 'selected' : ''}>Примено</option>
+                        <option value="Примено" ${isWarehouseReceivedFilled ? 'selected' : ''}>Примено</option>
                     </select>
                     ${tx.warehouseReceive ? `<br><small>${tx.warehouseReceive}</small>` : ''}
                 </td>
                 <td>
-                    <input type="text" class="table-input ${!canEditWarehouse ? 'locked-field' : ''}" ${!canEditWarehouse ? 'disabled' : ''} value="${tx.warehouseDispatch || ''}" placeholder="Испратено по возач..." onchange="updateField('${tx.firebaseId}', 'warehouseDispatch', this.value)">
+                    <input type="text" class="table-input ${!canEditWarehouseDispatch ? 'locked-field' : ''}" ${!canEditWarehouseDispatch ? 'disabled' : ''} value="${tx.warehouseDispatch || ''}" placeholder="Испратено по возач..." onchange="updateField('${tx.firebaseId}', 'warehouseDispatch', this.value)">
                 </td>
                 <td>
                     <label style="display: flex; align-items: center; gap: 5px; cursor: ${canEditReceiver ? 'pointer' : 'not-allowed'}">
-                        <input type="checkbox" ${tx.receiverConfirm ? 'checked' : ''} ${!canEditReceiver ? 'disabled' : ''} onchange="updateField('${tx.firebaseId}', 'receiverConfirm', this.checked)">
+                        <input type="checkbox" ${isReceiverConfirmed ? 'checked' : ''} ${!canEditReceiver ? 'disabled' : ''} onchange="updateField('${tx.firebaseId}', 'receiverConfirm', this.checked)">
                         <span style="font-size: 0.85rem;">${tx.receiverConfirm ? 'Примено (' + tx.receiverConfirm + ')' : 'Чека потврда'}</span>
                     </label>
                 </td>
                 <td class="actions-cell">
-                    ${role === 'admin' ? `<button class="btn btn-danger btn-sm" onclick="deleteTransfer('${tx.firebaseId}')">Избриши</button>` : '<small>Увид</small>'}
+                    ${role === 'admin' ? `
+                        <button class="btn btn-warning btn-sm" onclick="openAdminModal('${tx.firebaseId}')">Измени</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteTransfer('${tx.firebaseId}')">Избриши</button>
+                    ` : '<small>Увид</small>'}
                 </td>
             `;
             tbody.appendChild(tr);
