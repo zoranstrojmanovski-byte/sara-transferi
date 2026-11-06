@@ -252,7 +252,7 @@
     <header>
         <div>
             <h1>Sara Fashion - Управување со Трансфери (Cloud)</h1>
-            <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #64748b;">Синхронизација во реално време за 70 локации (Админ контрола)</p>
+            <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #64748b;">Синхронизација во реално време за 70 локации (Строга контрола)</p>
         </div>
         <div class="controls-top">
             <div class="control-group">
@@ -344,7 +344,7 @@
         <h2>Преглед на трансфери и филтрирање</h2>
         <div class="filter-section">
             <div class="control-group">
-                <label for="filterShop">Избери дуќан:</label>
+                <label for="filterShop">Избери дуќан (Филтер):</label>
                 <select id="filterShop" onchange="renderTable()">
                     <option value="ALL">Сите продавници</option>
                 </select>
@@ -429,15 +429,15 @@
             </div>
             <div>
                 <label style="font-size: 0.85rem; font-weight: bold;">Прием во магацин:</label>
-                <input type="text" id="modalWarehouseReceive" class="table-input" placeholder="пр. Примено (04.11.2026 12:00)">
+                <input type="text" id="modalWarehouseReceive" class="table-input">
             </div>
             <div>
                 <label style="font-size: 0.85rem; font-weight: bold;">Испратено од магацин:</label>
-                <input type="text" id="modalWarehouseDispatch" class="table-input" placeholder="пр. Испратено по возач...">
+                <input type="text" id="modalWarehouseDispatch" class="table-input">
             </div>
             <div>
                 <label style="font-size: 0.85rem; font-weight: bold;">Потврда прием од примач:</label>
-                <input type="text" id="modalReceiverConfirm" class="table-input" placeholder="пр. 04.11.2026 14:30 (или празно)">
+                <input type="text" id="modalReceiverConfirm" class="table-input">
             </div>
 
             <div style="display: flex; gap: 10px; margin-top: 15px;">
@@ -656,6 +656,21 @@
         const tx = transfers.find(t => t.firebaseId === firebaseId);
         if (!tx) return;
 
+        // PROVERKA ZA PRIMAC: Samo navedeniot primac (ili admin) moze da go potvrdi priemot
+        if (field === 'receiverConfirm' && role !== 'admin') {
+            if (role !== 'receiver') {
+                alert('Само улогата Примач може да потврдува приеми!');
+                renderTable();
+                return;
+            }
+            const currentSelectedShop = document.getElementById('filterShop').value;
+            if (currentSelectedShop !== tx.receiverName) {
+                alert(`Грешка! Само примачот за овој трансфер ("${tx.receiverName}") може да го потврди приемот. Моментално сте избрале друг дуќан во филтерот.`);
+                renderTable();
+                return;
+            }
+        }
+
         let updates = {};
 
         if (role !== 'admin') {
@@ -694,11 +709,6 @@
         }
 
         if (field === 'receiverConfirm') {
-            if (role !== 'receiver' && role !== 'admin') {
-                alert('Само примачот може да потврди прием!');
-                renderTable();
-                return;
-            }
             if (value) {
                 updates.receiverConfirm = getCurrentDateTime();
                 updates.status = 'Завршен';
@@ -803,7 +813,7 @@
         const selectedShop = document.getElementById('filterShop').value;
         const filterType = document.getElementById('filterType').value;
         const dateFrom = document.getElementById('dateFrom').value;
-        const dateTo = document.getElementById('dateTo').value;
+        const dateTo = document.getElementById('dateTo'.value);
 
         return transfers.filter(t => {
             let shopMatch = true;
@@ -893,7 +903,7 @@
                 </td>
                 <td class="actions-cell">
                     ${role === 'admin' ? `
-                        <button class="btn btn-warning btn-sm" onclick="openAdminModal('${tx.firebaseId}')">Измени</button>
+                        <button class="btn btn-warning btn-sm" onclick="openAdminModal('${tx.firebaseId}')">Измените</button>
                         <button class="btn btn-danger btn-sm" onclick="deleteTransfer('${tx.firebaseId}')">Избриши</button>
                     ` : '<small>Увид</small>'}
                 </td>
