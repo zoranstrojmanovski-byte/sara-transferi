@@ -6,7 +6,7 @@
     <title>Sara Fashion - Централна Евиденција на Трансфери (Realtime)</title>
     
     <!-- PWA Manifest & Custom Black/Pink Icon -->
-    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Sara%20Fashion%20Transferi%22%2C%22short_name%22%3A%22SaraFashion%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23000000%22%2C%22theme_color%22%3A%22%23ff1493%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.svgopen.org%2Fsvg%2F2007%2F07%2Fsvg-1.0.dtd%27%20width%3D%27512%27%20height%3D%27512%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23000000%27%2F%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20fill%3D%27%23ff1493%27%20font-size%3D%2770%27%20font-family%3D%27Arial%2C%20sans-serif%27%20font-weight%3D%27bold%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%3ESARA%3C%2Ftext%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2765%25%27%20fill%3D%27%23ff1493%27%20font-size%3D%2750%27%20font-family%3D%27Arial%2C%20sans-serif%27%20font-weight%3D%27bold%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%3EFASHION%3C%2Ftext%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Sara%20Fashion%20Transferi%22%2C%22short_name%22%3A%22SaraFashion%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23000000%22%2C%22theme_color%22%3A%22%23ff1493%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.svgopen.org%2Fsvg%2F2007%2F07%2Fsvg-1.0.dtd'%20width%3D'512'%20height%3D'512'%3E%3Crect%20width%3D'100%25'%20height%3D'100%25'%20fill%3D'%23000000'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'50%25'%20fill%3D'%23ff1493'%20font-size%3D'70'%20font-family%3D'Arial%2C%20sans-serif'%20font-weight%3D'bold'%20text-anchor%3D'middle'%20dominant-baseline%3D'middle'%3ESARA%3C%2Ftext%3E%3Ctext%20x%3D'50%25'%20y%3D'65%25'%20fill%3D'%23ff1493'%20font-size%3D'50'%20font-family%3D'Arial%2C%20sans-serif'%20font-weight%3D'bold'%20text-anchor%3D'middle'%20dominant-baseline%3D'middle'%3EFASHION%3C%2Ftext%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
     <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512'><rect width='100%' height='100%' fill='%23000000'/><text x='50%' y='50%' fill='%23ff1493' font-size='70' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>SARA</text><text x='50%' y='65%' fill='%23ff1493' font-size='50' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>FASHION</text></svg>">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512'><rect width='100%' height='100%' fill='%23000000'/><text x='50%' y='50%' fill='%23ff1493' font-size='70' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>SARA</text><text x='50%' y='65%' fill='%23ff1493' font-size='50' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>FASHION</text></svg>">
 
@@ -357,6 +357,16 @@
                     <option value="received">Само Примени</option>
                 </select>
             </div>
+            <div class="control-group" id="adminStatusFilterGroup" style="display: none;">
+                <label for="filterAdminStatus">Статус (Админ):</label>
+                <select id="filterAdminStatus" onchange="renderTable()">
+                    <option value="ALL">Сите статуси</option>
+                    <option value="Најавен">Само Најавени</option>
+                    <option value="Во транзит">Само Во транзит</option>
+                    <option value="Завршен">Само Завршени</option>
+                    <option value="NOT_COMPLETED">Само незавршени (не Завршени)</option>
+                </select>
+            </div>
             <div class="control-group">
                 <label for="dateFrom">Од датум:</label>
                 <input type="date" id="dateFrom" onchange="renderTable()">
@@ -525,16 +535,23 @@
         closeModal();
         const formCard = document.getElementById('newTransferCard');
         const adminCard = document.getElementById('adminShopCard');
+        const adminStatusGroup = document.getElementById('adminStatusFilterGroup');
+        const adminStatusSelect = document.getElementById('filterAdminStatus');
         
         if (role === 'admin') {
             adminCard.style.display = 'block';
             formCard.style.display = 'block';
+            if (adminStatusGroup) adminStatusGroup.style.display = 'flex';
         } else if (role === 'sender') {
             adminCard.style.display = 'none';
             formCard.style.display = 'block';
+            if (adminStatusGroup) adminStatusGroup.style.display = 'none';
+            if (adminStatusSelect) adminStatusSelect.value = 'ALL';
         } else {
             adminCard.style.display = 'none';
             formCard.style.display = 'none';
+            if (adminStatusGroup) adminStatusGroup.style.display = 'none';
+            if (adminStatusSelect) adminStatusSelect.value = 'ALL';
         }
         renderShopSelectors();
         renderTable();
@@ -804,16 +821,21 @@
     function resetFilters() {
         document.getElementById('filterShop').value = 'ALL';
         document.getElementById('filterType').value = 'both';
+        const adminStatusSelect = document.getElementById('filterAdminStatus');
+        if (adminStatusSelect) adminStatusSelect.value = 'ALL';
         document.getElementById('dateFrom').value = '';
         document.getElementById('dateTo').value = '';
         renderTable();
     }
 
     function getFilteredTransfers() {
+        const role = getUserRole();
         const selectedShop = document.getElementById('filterShop').value;
         const filterType = document.getElementById('filterType').value;
+        const adminStatusSelect = document.getElementById('filterAdminStatus');
+        const adminStatus = (role === 'admin' && adminStatusSelect) ? adminStatusSelect.value : 'ALL';
         const dateFrom = document.getElementById('dateFrom').value;
-        const dateTo = document.getElementById('dateTo'.value);
+        const dateTo = document.getElementById('dateTo').value;
 
         return transfers.filter(t => {
             let shopMatch = true;
@@ -825,6 +847,19 @@
                 } else {
                     shopMatch = (t.senderShop === selectedShop || t.receiverName === selectedShop);
                 }
+            } else {
+                if (filterType === 'received') {
+                    shopMatch = (t.status === 'Завршен' || Boolean(t.receiverConfirm));
+                }
+            }
+
+            let statusMatch = true;
+            if (adminStatus !== 'ALL') {
+                if (adminStatus === 'NOT_COMPLETED') {
+                    statusMatch = (t.status !== 'Завршен');
+                } else {
+                    statusMatch = (t.status === adminStatus);
+                }
             }
 
             let dateMatch = true;
@@ -833,7 +868,7 @@
                 if (dateTo && t.rawDate > dateTo) dateMatch = false;
             }
 
-            return shopMatch && dateMatch;
+            return shopMatch && statusMatch && dateMatch;
         });
     }
 
