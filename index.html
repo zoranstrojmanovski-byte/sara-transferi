@@ -33,7 +33,7 @@
 
     * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
     body { margin: 0; background: var(--bg); color: var(--text); padding: 14px; }
-    .page { max-width: 1380px; margin: 0 auto; }
+    .page { max-width: 1420px; margin: 0 auto; }
 
     /* Top Header */
     .top-bar {
@@ -322,7 +322,7 @@
         <input type="number" id="pkgInput" min="1" placeholder="пр. 5">
       </div>
       <div class="field">
-        <label>Возач:</label>
+        <label>Возач (предавање):</label>
         <input type="text" id="driverInput" placeholder="пр. Марјан Возач">
       </div>
       <div>
@@ -375,6 +375,7 @@
             <th>Датум на предавање</th>
             <th>Прием во магацин</th>
             <th>Испратено од магацин</th>
+            <th>Возач (Магацин)</th>
             <th>Потврда прием</th>
             <th>Акции (Админ / Увид)</th>
           </tr>
@@ -408,8 +409,12 @@
       <input type="number" id="editPkg" min="1">
     </div>
     <div class="field" style="margin-bottom:8px;">
-      <label>Возач:</label>
+      <label>Возач (предавање):</label>
       <input type="text" id="editDriver">
+    </div>
+    <div class="field" style="margin-bottom:8px;">
+      <label>Возач (магацин):</label>
+      <input type="text" id="editWhDriver">
     </div>
     <div class="field" style="margin-bottom:8px;">
       <label>Статус:</label>
@@ -736,7 +741,7 @@
     const list = getFilteredList();
 
     if (!list.length) {
-      tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding:16px; color:#666;">Нема трансфери за избраниот филтер.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="12" style="text-align:center; padding:16px; color:#666;">Нема трансфери за избраниот филтер.</td></tr>`;
       return;
     }
 
@@ -754,10 +759,14 @@
             : `<span class="hint-small">Се чека магацин</span>`);
 
       const whSentCell = t.warehouseSent
-        ? `<span style="color:var(--info); font-weight:bold;">Испратено</span><span class="hint-small">${esc(t.warehouseDriver || "")} (${esc(t.warehouseSentTime || "")})</span>`
+        ? `<span style="color:var(--info); font-weight:bold;">Испратено</span><span class="hint-small">${esc(t.warehouseSentTime || "")}</span>`
         : (isWhRole && t.warehouseReceived
             ? `<button class="btn btn-gray" style="padding:3px 7px; font-size:11px;" onclick="whSend('${t.id}')">Испрати</button>`
             : `<span class="hint-small">${t.warehouseReceived ? "Се чека испраќање" : "-"}</span>`);
+
+      const whDriverCell = t.warehouseDriver
+        ? `<strong>${esc(t.warehouseDriver)}</strong>`
+        : `<span class="hint-small">-</span>`;
 
       const allowedReceiver = (role === "receiver" && chosenShop && chosenShop === t.to);
       const canCheck = !t.receiverConfirmed && (role === "admin" || allowedReceiver);
@@ -789,6 +798,7 @@
           <td>${esc(t.createdAt || "")}</td>
           <td>${whRecCell}</td>
           <td>${whSentCell}</td>
+          <td>${whDriverCell}</td>
           <td>${recvCell}</td>
           <td>${actCell}</td>
         </tr>
@@ -850,6 +860,7 @@
     document.getElementById("editDoc").value = t.doc || "";
     document.getElementById("editPkg").value = t.packages || 1;
     document.getElementById("editDriver").value = t.driver || "";
+    document.getElementById("editWhDriver").value = t.warehouseDriver || "";
     document.getElementById("editStatus").value = t.status || "Најавен";
     document.getElementById("editModal").classList.add("open");
   }
@@ -867,6 +878,7 @@
       doc: document.getElementById("editDoc").value.trim(),
       packages: Number(document.getElementById("editPkg").value) || 1,
       driver: document.getElementById("editDriver").value.trim(),
+      warehouseDriver: document.getElementById("editWhDriver").value.trim(),
       status: st
     };
     if (st !== "Завршен") upd.receiverConfirmed = false;
@@ -886,9 +898,9 @@
     const rows = getFilteredList();
     if (!rows.length) return alert("Нема податоци за експорт.");
 
-    let html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><tr><th>Статус</th><th>Испраќач</th><th>Примач</th><th>Бр. Документ</th><th>Бр. Пакети</th><th>Возач</th><th>Датум</th><th>Прием магацин</th><th>Испратено магацин</th><th>Потврда прием</th></tr>`;
+    let html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><tr><th>Статус</th><th>Испраќач</th><th>Примач</th><th>Бр. Документ</th><th>Бр. Пакети</th><th>Возач</th><th>Датум</th><th>Прием магацин</th><th>Испратено магацин</th><th>Возач (Магацин)</th><th>Потврда прием</th></tr>`;
     rows.forEach((t) => {
-      html += `<tr><td>${esc(t.status || "")}</td><td>${esc(t.from || "")}</td><td>${esc(t.to || "")}</td><td>${esc(t.doc || "")}</td><td>${esc(String(t.packages || ""))}</td><td>${esc(t.driver || "")}</td><td>${esc(t.createdAt || "")}</td><td>${t.warehouseReceived ? "Примено" : "Не"}</td><td>${t.warehouseSent ? "Испратено" : "Не"}</td><td>${t.receiverConfirmed ? "Примено" : "Не"}</td></tr>`;
+      html += `<tr><td>${esc(t.status || "")}</td><td>${esc(t.from || "")}</td><td>${esc(t.to || "")}</td><td>${esc(t.doc || "")}</td><td>${esc(String(t.packages || ""))}</td><td>${esc(t.driver || "")}</td><td>${esc(t.createdAt || "")}</td><td>${t.warehouseReceived ? "Примено" : "Не"}</td><td>${t.warehouseSent ? "Испратено" : "Не"}</td><td>${esc(t.warehouseDriver || "")}</td><td>${t.receiverConfirmed ? "Примено" : "Не"}</td></tr>`;
     });
     html += `</table></body></html>`;
 
