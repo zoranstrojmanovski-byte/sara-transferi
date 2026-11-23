@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sara Fashion - Централна Евиденција на Трансфери (Realtime)</title>
 
-  <!-- PWA Manifest & Custom Black/Pink Icon -->
   <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Sara%20Fashion%20Transferi%22%2C%22short_name%22%3A%22SaraFashion%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23000000%22%2C%22theme_color%22%3A%22%23ff1493%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'512'%20height%3D'512'%3E%3Crect%20width%3D'100%25'%20height%3D'100%25'%20fill%3D'%23000000'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'50%25'%20fill%3D'%23ff1493'%20font-size%3D'70'%20font-family%3D'Arial%2C%20sans-serif'%20font-weight%3D'bold'%20text-anchor%3D'middle'%20dominant-baseline%3D'middle'%3ESARA%3C%2Ftext%3E%3Ctext%20x%3D'50%25'%20y%3D'65%25'%20fill%3D'%23ffd700'%20font-size%3D'45'%20font-family%3D'Arial%2C%20sans-serif'%20font-weight%3D'bold'%20text-anchor%3D'middle'%20dominant-baseline%3D'middle'%3EFASHION%3C%2Ftext%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
   <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512'><rect width='100%' height='100%' fill='%23000000'/><text x='50%' y='48%' fill='%23ff1493' font-size='75' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>SARA</text><text x='50%' y='64%' fill='%23ffd700' font-size='50' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>FASHION</text></svg>">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512'><rect width='100%' height='100%' fill='%23000000'/><text x='50%' y='48%' fill='%23ff1493' font-size='75' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>SARA</text><text x='50%' y='64%' fill='%23ffd700' font-size='50' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>FASHION</text></svg>">
 
-  <!-- Firebase SDK Compat -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
@@ -24,47 +22,46 @@
       --warning: #ed6c02;
       --info: #0288d1;
       --danger: #d32f2f;
-      --bg: #f5f5f7;
+      --bg: #f4f5f7;
       --card: #ffffff;
       --text: #222222;
       --muted: #666666;
-      --line: #e0e0e0;
+      --line: #dddddd;
     }
 
     * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
     body { margin: 0; background: var(--bg); color: var(--text); padding: 14px; }
-    .page { max-width: 1420px; margin: 0 auto; }
+    .wrap { max-width: 1440px; margin: 0 auto; }
 
-    /* Top Header */
-    .top-bar {
+    .header-box {
       background: #fff;
-      border-radius: 8px;
       padding: 14px 18px;
+      border-radius: 8px;
+      border-bottom: 2px solid var(--primary);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      border-bottom: 2px solid var(--primary);
       margin-bottom: 14px;
     }
-    .top-bar h1 { margin: 0; font-size: 20px; color: var(--primary); }
-    .top-bar small { color: var(--muted); font-size: 12px; }
+    .header-box h1 { margin: 0; font-size: 20px; color: var(--primary); }
+    .header-box small { color: var(--muted); font-size: 12px; }
 
-    .top-actions {
+    .header-right {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .role-wrap {
+    .role-box {
       display: flex;
       flex-direction: column;
       font-size: 11px;
       color: var(--muted);
     }
-    .role-wrap select {
+    .role-box select {
       margin-top: 3px;
       padding: 6px 10px;
       border: 1px solid #bbb;
@@ -74,11 +71,10 @@
       color: var(--text);
     }
 
-    /* Buttons */
     .btn {
       border: none;
       border-radius: 5px;
-      padding: 8px 13px;
+      padding: 8px 12px;
       font-size: 12px;
       font-weight: bold;
       cursor: pointer;
@@ -90,52 +86,49 @@
     .btn-notify-off { background: #e0e0e0; color: #333; }
     .btn-notify-on { background: #fff176; color: #111; border: 1px solid #fbc02d; }
     .btn-gray { background: #757575; color: #fff; }
-    .btn-red { background: var(--danger); color: #fff; padding: 4px 8px; font-size: 11px; }
     .btn-blue { background: var(--info); color: #fff; padding: 4px 8px; font-size: 11px; }
+    .btn-red { background: var(--danger); color: #fff; padding: 4px 8px; font-size: 11px; }
 
-    /* Stats Strip */
-    .stats-row {
+    .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
       margin-bottom: 14px;
     }
-    @media (max-width: 800px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 800px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
 
-    .stat-box {
-      background: var(--card);
+    .stat-card {
+      background: #fff;
       border-radius: 8px;
       padding: 12px 14px;
       border-left: 4px solid var(--primary);
     }
-    .stat-box.najaven { border-left-color: var(--warning); }
-    .stat-box.tranzit { border-left-color: var(--info); }
-    .stat-box.zavrsen { border-left-color: var(--success); }
-    .stat-box .label { font-size: 12px; color: var(--muted); display: block; }
-    .stat-box .num { font-size: 24px; font-weight: bold; margin-top: 4px; display: block; }
+    .stat-card.warn { border-left-color: var(--warning); }
+    .stat-card.info { border-left-color: var(--info); }
+    .stat-card.ok { border-left-color: var(--success); }
+    .stat-card span { font-size: 12px; color: var(--muted); display: block; }
+    .stat-card strong { font-size: 24px; margin-top: 4px; display: block; }
 
-    /* Section Cards */
-    .section-card {
-      background: var(--card);
+    .panel {
+      background: #fff;
+      border: 1px solid var(--line);
       border-radius: 8px;
       padding: 14px 16px;
       margin-bottom: 14px;
-      border: 1px solid var(--line);
     }
-    .section-card.pink-tint {
+    .panel.pink-panel {
       background: var(--soft-pink);
       border-color: var(--soft-pink-border);
     }
-    .section-title {
+    .panel-title {
       margin: 0 0 12px;
       font-size: 15px;
       font-weight: bold;
-      color: var(--text);
     }
 
-    .grid-form {
+    .row-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
       gap: 10px;
       align-items: end;
     }
@@ -155,19 +148,18 @@
       background: #fff;
     }
 
-    /* Table */
-    .table-wrap { overflow-x: auto; }
+    .table-wrap { overflow-x: auto; background: #fff; border-radius: 6px; padding: 6px; }
     table { width: 100%; border-collapse: collapse; font-size: 12px; }
     th, td {
       padding: 8px 7px;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid #e5e5e5;
       text-align: left;
       vertical-align: middle;
     }
-    th { background: #fafafa; font-weight: bold; color: #333; white-space: nowrap; }
+    th { background: #fafafa; font-weight: bold; white-space: nowrap; }
     tr:hover { background: #fff8fb; }
 
-    .status-pill {
+    .badge {
       padding: 3px 8px;
       border-radius: 12px;
       font-size: 11px;
@@ -175,15 +167,14 @@
       display: inline-block;
       white-space: nowrap;
     }
-    .st-najaven { background: #fff3e0; color: #e65100; }
-    .st-tranzit { background: #e1f5fe; color: #01579b; }
-    .st-zavrsen { background: #e8f5e9; color: #1b5e20; }
+    .b-najaven { background: #fff3e0; color: #e65100; }
+    .b-tranzit { background: #e1f5fe; color: #01579b; }
+    .b-zavrsen { background: #e8f5e9; color: #1b5e20; }
 
-    .hint-small { font-size: 10px; color: var(--muted); display: block; margin-top: 2px; }
-    .check-box { display: inline-flex; align-items: center; gap: 5px; font-weight: bold; cursor: pointer; }
+    .sub-note { font-size: 10px; color: var(--muted); display: block; margin-top: 2px; }
+    .chk-wrap { display: inline-flex; align-items: center; gap: 5px; font-weight: bold; cursor: pointer; }
 
-    /* Toast */
-    #toastBox {
+    #toastArea {
       position: fixed;
       bottom: 16px;
       right: 16px;
@@ -193,7 +184,7 @@
       gap: 8px;
       max-width: 340px;
     }
-    .toast-item {
+    .toast-msg {
       background: #222;
       color: #fff;
       border-left: 4px solid var(--primary);
@@ -203,7 +194,6 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    /* Modal */
     .modal-bg {
       display: none;
       position: fixed;
@@ -215,7 +205,7 @@
       padding: 12px;
     }
     .modal-bg.open { display: flex; }
-    .modal-box {
+    .modal-card {
       background: #fff;
       padding: 18px;
       border-radius: 8px;
@@ -224,32 +214,44 @@
       max-height: 90vh;
       overflow-y: auto;
     }
-    .shop-ul { list-style: none; padding: 0; margin: 10px 0 0; max-height: 180px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; }
-    .shop-ul li { display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; border-bottom: 1px solid #eee; font-size: 12px; }
+    .shop-ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+      max-height: 180px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .shop-ul li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 10px;
+      border-bottom: 1px solid #eee;
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
-<div class="page">
+<div class="wrap">
 
-  <!-- TOP HEADER -->
-  <div class="top-bar">
+  <div class="header-box">
     <div>
       <h1>Sara Fashion - Управување со Трансфери (Cloud)</h1>
       <small>Синхронизација во реално време за 70 локации (Строга контрола)</small>
     </div>
 
-    <div class="top-actions">
-      <button id="autoNotifyBtn" class="btn btn-notify-off" onclick="toggleAutoNotify()">
+    <div class="header-right">
+      <button id="btnNotify" class="btn btn-notify-off" onclick="toggleNotify()">
         🔔 Автоматско известување: ИСКЛУЧЕНО
       </button>
-
       <button class="btn btn-green" onclick="exportExcel()">
         📊 Експорт во Excel
       </button>
-
-      <div class="role-wrap">
+      <div class="role-box">
         <label for="roleSelect">Тековна улога:</label>
-        <select id="roleSelect" onchange="onRoleChange()">
+        <select id="roleSelect" onchange="changeRole()">
           <option value="sender">Испраќач (Продавница)</option>
           <option value="receiver">Примач (Продавница)</option>
           <option value="warehouse">Магационер (Централен магацин)</option>
@@ -259,52 +261,33 @@
     </div>
   </div>
 
-  <!-- STATS -->
-  <div class="stats-row">
-    <div class="stat-box">
-      <span class="label">Вкупно трансфери</span>
-      <span class="num" id="stTotal">0</span>
-    </div>
-    <div class="stat-box najaven">
-      <span class="label">Најавени</span>
-      <span class="num" id="stNajaveni">0</span>
-    </div>
-    <div class="stat-box tranzit">
-      <span class="label">Во транзит</span>
-      <span class="num" id="stTranzit">0</span>
-    </div>
-    <div class="stat-box zavrsen">
-      <span class="label">Завршени</span>
-      <span class="num" id="stZavrseni">0</span>
-    </div>
+  <div class="stats-grid">
+    <div class="stat-card"><span>Вкупно трансфери</span><strong id="sTotal">0</strong></div>
+    <div class="stat-card warn"><span>Најавени</span><strong id="sNajaveni">0</strong></div>
+    <div class="stat-card info"><span>Во транзит</span><strong id="sTranzit">0</strong></div>
+    <div class="stat-card ok"><span>Завршени</span><strong id="sZavrseni">0</strong></div>
   </div>
 
-  <!-- ADMIN BOX -->
-  <div id="adminBox" class="section-card" style="display:none; border-color: var(--primary);">
-    <div class="section-title">Администраторски поставки</div>
-    <div class="grid-form">
+  <div id="adminPanel" class="panel" style="display:none; border-color: var(--primary);">
+    <div class="panel-title">Администраторски поставки</div>
+    <div class="row-grid">
       <div class="field">
         <label>Нов дуќан / локација:</label>
-        <input type="text" id="newShopInput" placeholder="пр. Дуќан 71">
+        <input type="text" id="newShop" placeholder="пр. Дуќан 71">
       </div>
-      <div>
-        <button class="btn btn-pink" onclick="addShop()">+ Додај дуќан</button>
-      </div>
+      <div><button class="btn btn-pink" onclick="addShop()">+ Додај дуќан</button></div>
       <div class="field">
         <label>Нов Admin PIN:</label>
-        <input type="password" id="newPinInput" placeholder="Нов PIN">
+        <input type="password" id="newPin" placeholder="Нов PIN">
       </div>
-      <div>
-        <button class="btn btn-gray" onclick="saveNewPin()">Зачувај PIN</button>
-      </div>
+      <div><button class="btn btn-gray" onclick="changePin()">Зачувај PIN</button></div>
     </div>
-    <ul id="shopAdminList" class="shop-ul"></ul>
+    <ul id="shopListAdmin" class="shop-ul"></ul>
   </div>
 
-  <!-- CREATE TRANSFER BOX -->
-  <div id="createBox" class="section-card pink-tint">
-    <div class="section-title">Креирај нов најавен трансфер (Испраќач)</div>
-    <div class="grid-form">
+  <div id="senderPanel" class="panel pink-panel">
+    <div class="panel-title">Креирај нов најавен трансфер (Испраќач)</div>
+    <div class="row-grid">
       <div class="field">
         <label>Од дуќан (Испраќач):</label>
         <select id="fromShop"></select>
@@ -315,29 +298,28 @@
       </div>
       <div class="field">
         <label>Број на документ:</label>
-        <input type="text" id="docInput" placeholder="пр. ТР-1025">
+        <input type="text" id="docNum" placeholder="пр. ТР-1025">
       </div>
       <div class="field">
         <label>Број на пакети:</label>
-        <input type="number" id="pkgInput" min="1" placeholder="пр. 5">
+        <input type="number" id="pkgCount" min="1" placeholder="пр. 5">
       </div>
       <div class="field">
-        <label>Возач (предавање):</label>
-        <input type="text" id="driverInput" placeholder="пр. Марјан Возач">
+        <label>Возач:</label>
+        <input type="text" id="driverSender" placeholder="пр. Марјан Возач">
       </div>
       <div>
-        <button class="btn btn-pink" style="width:100%;" onclick="addTransfer()">Зачувај најава</button>
+        <button class="btn btn-pink" style="width:100%;" onclick="createTransfer()">Зачувај најава</button>
       </div>
     </div>
   </div>
 
-  <!-- FILTER & TABLE BOX -->
-  <div class="section-card pink-tint">
-    <div class="section-title">Преглед на трансфери и филтрирање</div>
-    <div class="grid-form" style="margin-bottom: 12px;">
+  <div class="panel pink-panel">
+    <div class="panel-title">Преглед на трансфери и филтрирање</div>
+    <div class="row-grid" style="margin-bottom:12px;">
       <div class="field">
         <label>Избери дуќан (Филтер):</label>
-        <select id="filterShop" onchange="onFilterShopChange()">
+        <select id="filterShop" onchange="onShopFilterChange()">
           <option value="">Сите продавници</option>
         </select>
       </div>
@@ -358,11 +340,11 @@
         <input type="date" id="dateTo" onchange="renderTable()">
       </div>
       <div>
-        <button class="btn btn-pink" style="width:100%;" onclick="resetAllFilters()">Ресетирај филтри</button>
+        <button class="btn btn-pink" style="width:100%;" onclick="resetFilters()">Ресетирај филтри</button>
       </div>
     </div>
 
-    <div class="table-wrap" style="background:#fff; border-radius:6px; padding:6px;">
+    <div class="table-wrap">
       <table>
         <thead>
           <tr>
@@ -375,23 +357,21 @@
             <th>Датум на предавање</th>
             <th>Прием во магацин</th>
             <th>Испратено од магацин</th>
-            <th>Возач (Магацин)</th>
             <th>Потврда прием</th>
             <th>Акции (Админ / Увид)</th>
           </tr>
         </thead>
-        <tbody id="tableBody"></tbody>
+        <tbody id="tbodyRows"></tbody>
       </table>
     </div>
   </div>
 
 </div>
 
-<!-- EDIT MODAL -->
 <div id="editModal" class="modal-bg">
-  <div class="modal-box">
+  <div class="modal-card">
     <h3 style="margin-top:0; color:var(--primary);">Уреди трансфер</h3>
-    <input type="hidden" id="editKey">
+    <input type="hidden" id="editId">
     <div class="field" style="margin-bottom:8px;">
       <label>Испраќач:</label>
       <select id="editFrom"></select>
@@ -409,11 +389,11 @@
       <input type="number" id="editPkg" min="1">
     </div>
     <div class="field" style="margin-bottom:8px;">
-      <label>Возач (предавање):</label>
+      <label>Возач:</label>
       <input type="text" id="editDriver">
     </div>
     <div class="field" style="margin-bottom:8px;">
-      <label>Возач (магацин):</label>
+      <label>Возач / Превозник од магацин:</label>
       <input type="text" id="editWhDriver">
     </div>
     <div class="field" style="margin-bottom:8px;">
@@ -425,13 +405,13 @@
       </select>
     </div>
     <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:12px;">
-      <button class="btn btn-gray" onclick="closeEdit()">Откажи</button>
-      <button class="btn btn-pink" onclick="saveEdit()">Зачувај</button>
+      <button class="btn btn-gray" onclick="closeEditModal()">Откажи</button>
+      <button class="btn btn-pink" onclick="saveEditModal()">Зачувај</button>
     </div>
   </div>
 </div>
 
-<div id="toastBox"></div>
+<div id="toastArea"></div>
 
 <script>
   const firebaseConfig = {
@@ -440,15 +420,15 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  let transfersData = {};
-  let shopsList = [];
-  let currentPin = "1234";
-  let adminUnlocked = false;
-  let notifyOn = false;
-  let firstSyncDone = false;
-  let prevSnapshot = {};
+  let transfers = {};
+  let shops = [];
+  let adminPin = "1234";
+  let adminAuthed = false;
+  let notifyEnabled = false;
+  let initialDone = false;
+  let prevData = {};
 
-  const fallbackShops = [
+  const defaultShops = [
     "Централен Магацин",
     "Дуќан Центар",
     "Дуќан Аеродром",
@@ -459,179 +439,178 @@
     "Дуќан Тетово"
   ];
 
-  db.ref("config/adminPin").on("value", (s) => {
-    if (s.exists()) currentPin = String(s.val());
+  db.ref("config/adminPin").on("value", (snap) => {
+    if (snap.exists()) adminPin = String(snap.val());
   });
 
-  db.ref("shops").on("value", (s) => {
-    const val = s.val();
+  db.ref("shops").on("value", (snap) => {
+    const val = snap.val();
     if (Array.isArray(val) && val.length) {
-      shopsList = val;
+      shops = val;
     } else if (val && typeof val === "object") {
-      shopsList = Object.values(val);
+      shops = Object.values(val);
     } else {
-      shopsList = [...fallbackShops];
-      db.ref("shops").set(shopsList);
+      shops = [...defaultShops];
+      db.ref("shops").set(shops);
     }
-    fillShopSelects();
-    renderShopAdmin();
+    populateSelects();
+    renderShopsAdmin();
     renderTable();
   });
 
-  db.ref("transfers").on("value", (s) => {
-    const incoming = s.val() || {};
-    if (firstSyncDone && notifyOn) {
-      detectAndNotify(prevSnapshot, incoming);
+  db.ref("transfers").on("value", (snap) => {
+    const cur = snap.val() || {};
+    if (initialDone && notifyEnabled) {
+      notifyDiffs(prevData, cur);
     }
-    prevSnapshot = JSON.parse(JSON.stringify(incoming));
-    transfersData = incoming;
-    firstSyncDone = true;
+    prevData = JSON.parse(JSON.stringify(cur));
+    transfers = cur;
+    initialDone = true;
     updateStats();
     renderTable();
   });
 
   window.addEventListener("DOMContentLoaded", () => {
-    if (localStorage.getItem("sf_notify_on") === "1") {
-      notifyOn = true;
-      refreshNotifyBtn();
+    if (localStorage.getItem("sf_notify_enabled") === "1") {
+      notifyEnabled = true;
+      updateNotifyBtn();
     }
   });
 
-  function toggleAutoNotify() {
-    notifyOn = !notifyOn;
-    localStorage.setItem("sf_notify_on", notifyOn ? "1" : "0");
-    refreshNotifyBtn();
-    if (notifyOn) {
-      beep();
-      pushToast("Автоматско известување е ВКЛУЧЕНО", "Ќе бидете известени при нов трансфер или промена на статус.");
+  function toggleNotify() {
+    notifyEnabled = !notifyEnabled;
+    localStorage.setItem("sf_notify_enabled", notifyEnabled ? "1" : "0");
+    updateNotifyBtn();
+    if (notifyEnabled) {
+      beepSound();
+      showToast("Автоматско известување е ВКЛУЧЕНО", "Ќе добивате известување за нови трансфери и промени.");
       if ("Notification" in window && Notification.permission === "default") {
         Notification.requestPermission();
       }
     } else {
-      pushToast("Автоматско известување е ИСКЛУЧЕНО", "Нема автоматски известувања.");
+      showToast("Автоматско известување е ИСКЛУЧЕНО", "Нема автоматски известувања.");
     }
   }
 
-  function refreshNotifyBtn() {
-    const btn = document.getElementById("autoNotifyBtn");
-    if (notifyOn) {
-      btn.className = "btn btn-notify-on";
-      btn.textContent = "🔔 Автоматско известување: ВКЛУЧЕНО";
+  function updateNotifyBtn() {
+    const b = document.getElementById("btnNotify");
+    if (notifyEnabled) {
+      b.className = "btn btn-notify-on";
+      b.textContent = "🔔 Автоматско известување: ВКЛУЧЕНО";
     } else {
-      btn.className = "btn btn-notify-off";
-      btn.textContent = "🔕 Автоматско известување: ИСКЛУЧЕНО";
+      b.className = "btn btn-notify-off";
+      b.textContent = "🔕 Автоматско известување: ИСКЛУЧЕНО";
     }
   }
 
-  function beep() {
+  function beepSound() {
     try {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.frequency.value = 840;
-      g.gain.setValueAtTime(0.12, ctx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-      o.connect(g);
-      g.connect(ctx.destination);
-      o.start();
-      o.stop(ctx.currentTime + 0.3);
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.frequency.value = 840;
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.3);
     } catch (e) {}
   }
 
-  function pushToast(title, text) {
-    const box = document.getElementById("toastBox");
-    const d = document.createElement("div");
-    d.className = "toast-item";
-    d.innerHTML = `<strong>${esc(title)}</strong><div>${esc(text)}</div>`;
-    box.appendChild(d);
-    setTimeout(() => d.remove(), 6000);
+  function showToast(title, msg) {
+    const area = document.getElementById("toastArea");
+    const div = document.createElement("div");
+    div.className = "toast-msg";
+    div.innerHTML = `<strong>${esc(title)}</strong><div>${esc(msg)}</div>`;
+    area.appendChild(div);
+    setTimeout(() => div.remove(), 6000);
   }
 
-  function detectAndNotify(oldObj, newObj) {
-    const chosenShop = document.getElementById("filterShop").value;
-    Object.keys(newObj).forEach((k) => {
-      const cur = newObj[k];
-      const old = oldObj[k];
-      if (chosenShop && cur.from !== chosenShop && cur.to !== chosenShop) return;
+  function notifyDiffs(oldObj, newObj) {
+    const shop = document.getElementById("filterShop").value;
+    Object.keys(newObj).forEach((key) => {
+      const item = newObj[key];
+      const old = oldObj[key];
+      if (shop && item.from !== shop && item.to !== shop) return;
 
       if (!old) {
-        beep();
-        const msg = `Док ${cur.doc || "-"}: Од ${cur.from} кон ${cur.to} (${cur.packages || 1} пак.)`;
-        pushToast("Нов најавен трансфер!", msg);
-        sysNotify("Sara Fashion - Нов трансфер", msg);
-      } else if (old.status !== cur.status) {
-        beep();
-        const msg = `Док ${cur.doc || "-"} (${cur.from} → ${cur.to}): ${cur.status}`;
-        pushToast("Промена на статус!", msg);
-        sysNotify("Sara Fashion - Статус", msg);
+        beepSound();
+        const text = `Док ${item.doc || "-"}: Од ${item.from} кон ${item.to} (${item.packages || 1} пак.)`;
+        showToast("Нов трансфер!", text);
+        pushSysNotif("Sara Fashion - Нов трансфер", text);
+      } else if (old.status !== item.status) {
+        beepSound();
+        const text = `Док ${item.doc || "-"} (${item.from} → ${item.to}): ${item.status}`;
+        showToast("Промена на статус!", text);
+        pushSysNotif("Sara Fashion - Промена на статус", text);
       }
     });
   }
 
-  function sysNotify(t, b) {
+  function pushSysNotif(title, body) {
     if ("Notification" in window && Notification.permission === "granted") {
-      try { new Notification(t, { body: b }); } catch (e) {}
+      try { new Notification(title, { body }); } catch (e) {}
     }
   }
 
-  function onRoleChange() {
+  function changeRole() {
     const r = document.getElementById("roleSelect").value;
     if (r === "admin") {
-      if (!adminUnlocked) {
-        const pin = prompt("Внесете Администраторски PIN:");
-        if (pin === currentPin) {
-          adminUnlocked = true;
+      if (!adminAuthed) {
+        const p = prompt("Внесете Администраторски PIN:");
+        if (p === adminPin) {
+          adminAuthed = true;
         } else {
           alert("Погрешен PIN!");
           document.getElementById("roleSelect").value = "sender";
-          adminUnlocked = false;
+          adminAuthed = false;
         }
       }
     } else {
-      adminUnlocked = false;
+      adminAuthed = false;
     }
-
     const active = document.getElementById("roleSelect").value;
-    document.getElementById("adminBox").style.display = active === "admin" ? "block" : "none";
-    document.getElementById("createBox").style.display = (active === "sender" || active === "admin") ? "block" : "none";
+    document.getElementById("adminPanel").style.display = active === "admin" ? "block" : "none";
+    document.getElementById("senderPanel").style.display = (active === "sender" || active === "admin") ? "block" : "none";
     renderTable();
   }
 
-  function fillShopSelects() {
-    const fSel = document.getElementById("fromShop");
-    const tSel = document.getElementById("toShop");
-    const flSel = document.getElementById("filterShop");
+  function populateSelects() {
+    const fromSel = document.getElementById("fromShop");
+    const toSel = document.getElementById("toShop");
+    const filterSel = document.getElementById("filterShop");
     const efSel = document.getElementById("editFrom");
     const etSel = document.getElementById("editTo");
 
-    const savedFilter = flSel.value || localStorage.getItem("sf_filter_shop") || "";
-    const savedFrom = fSel.value;
-    const savedTo = tSel.value;
+    const savedFilter = filterSel.value || localStorage.getItem("sf_filter_shop") || "";
+    const savedFrom = fromSel.value;
+    const savedTo = toSel.value;
 
-    const fromOpts = `<option value="">Избери дуќан...</option>` +
-      shopsList.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
-    const toOpts = `<option value="">Избери примач...</option>` +
-      shopsList.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
+    const fOpts = `<option value="">Избери дуќан...</option>` +
+      shops.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
+    const tOpts = `<option value="">Избери примач...</option>` +
+      shops.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
 
-    fSel.innerHTML = fromOpts;
-    tSel.innerHTML = toOpts;
-    efSel.innerHTML = fromOpts;
-    etSel.innerHTML = toOpts;
+    fromSel.innerHTML = fOpts;
+    toSel.innerHTML = tOpts;
+    efSel.innerHTML = fOpts;
+    etSel.innerHTML = tOpts;
 
-    flSel.innerHTML = `<option value="">Сите продавници</option>` +
-      shopsList.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
+    filterSel.innerHTML = `<option value="">Сите продавници</option>` +
+      shops.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
 
-    if (shopsList.includes(savedFilter)) flSel.value = savedFilter;
-    if (shopsList.includes(savedFrom)) fSel.value = savedFrom;
-    if (shopsList.includes(savedTo)) tSel.value = savedTo;
+    if (shops.includes(savedFilter)) filterSel.value = savedFilter;
+    if (shops.includes(savedFrom)) fromSel.value = savedFrom;
+    if (shops.includes(savedTo)) toSel.value = savedTo;
   }
 
-  function onFilterShopChange() {
+  function onShopFilterChange() {
     localStorage.setItem("sf_filter_shop", document.getElementById("filterShop").value);
     renderTable();
   }
 
-  function resetAllFilters() {
+  function resetFilters() {
     document.getElementById("filterShop").value = "";
     document.getElementById("filterType").value = "all";
     document.getElementById("dateFrom").value = "";
@@ -641,42 +620,42 @@
   }
 
   function addShop() {
-    const inp = document.getElementById("newShopInput");
+    const inp = document.getElementById("newShop");
     const name = inp.value.trim();
     if (!name) return alert("Внесете име на дуќан!");
-    if (shopsList.includes(name)) return alert("Веќе постои!");
-    db.ref("shops").set([...shopsList, name]);
+    if (shops.includes(name)) return alert("Веќе постои!");
+    db.ref("shops").set([...shops, name]);
     inp.value = "";
   }
 
-  function removeShop(i) {
+  function removeShop(idx) {
     if (!confirm("Да се избрише дуќанот?")) return;
-    db.ref("shops").set(shopsList.filter((_, idx) => idx !== i));
+    db.ref("shops").set(shops.filter((_, i) => i !== idx));
   }
 
-  function renderShopAdmin() {
-    document.getElementById("shopAdminList").innerHTML = shopsList.map((s, i) => `
+  function renderShopsAdmin() {
+    document.getElementById("shopListAdmin").innerHTML = shops.map((s, idx) => `
       <li>
         <span>${esc(s)}</span>
-        <button class="btn btn-red" onclick="removeShop(${i})">Избриши</button>
+        <button class="btn btn-red" onclick="removeShop(${idx})">Избриши</button>
       </li>
     `).join("");
   }
 
-  function saveNewPin() {
-    const p = document.getElementById("newPinInput").value.trim();
+  function changePin() {
+    const p = document.getElementById("newPin").value.trim();
     if (!p || p.length < 4) return alert("PIN-от треба да има најмалку 4 знаци.");
     db.ref("config/adminPin").set(p);
-    document.getElementById("newPinInput").value = "";
+    document.getElementById("newPin").value = "";
     alert("PIN-от е променет.");
   }
 
-  function addTransfer() {
+  function createTransfer() {
     const from = document.getElementById("fromShop").value;
     const to = document.getElementById("toShop").value;
-    const doc = document.getElementById("docInput").value.trim();
-    const pkg = document.getElementById("pkgInput").value.trim();
-    const driver = document.getElementById("driverInput").value.trim();
+    const doc = document.getElementById("docNum").value.trim();
+    const pkg = document.getElementById("pkgCount").value.trim();
+    const driver = document.getElementById("driverSender").value.trim();
 
     if (!from || !to) return alert("Изберете Испраќач и Примач!");
     if (from === to) return alert("Испраќачот и примачот не можат да бидат исти!");
@@ -690,7 +669,7 @@
       doc,
       packages: Number(pkg),
       driver: driver || "-",
-      createdAt: fmtDate(now),
+      createdAt: formatDt(now),
       isoDate: now.toISOString().split("T")[0],
       timestamp: Date.now(),
       status: "Најавен",
@@ -703,21 +682,21 @@
       receiverConfirmedTime: ""
     });
 
-    document.getElementById("docInput").value = "";
-    document.getElementById("pkgInput").value = "";
-    document.getElementById("driverInput").value = "";
+    document.getElementById("docNum").value = "";
+    document.getElementById("pkgCount").value = "";
+    document.getElementById("driverSender").value = "";
   }
 
-  function getFilteredList() {
+  function getFiltered() {
     const sh = document.getElementById("filterShop").value;
     const tp = document.getElementById("filterType").value;
     const df = document.getElementById("dateFrom").value;
     const dt = document.getElementById("dateTo").value;
 
-    const rows = Object.entries(transfersData).map(([id, v]) => ({ id, ...v }));
-    rows.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+    const list = Object.entries(transfers).map(([id, v]) => ({ id, ...v }));
+    list.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 
-    return rows.filter((t) => {
+    return list.filter((t) => {
       if (sh) {
         if (tp === "sent" && t.from !== sh) return false;
         if (tp === "received" && t.to !== sh) return false;
@@ -727,7 +706,7 @@
         if (tp === "received" && t.status !== "Завршен") return false;
       }
 
-      const d = t.isoDate || parseDateToIso(t.createdAt);
+      const d = t.isoDate || toIsoDate(t.createdAt);
       if (df && d && d < df) return false;
       if (dt && d && d > dt) return false;
       return true;
@@ -735,97 +714,92 @@
   }
 
   function renderTable() {
-    const tbody = document.getElementById("tableBody");
+    const tbody = document.getElementById("tbodyRows");
     const role = document.getElementById("roleSelect").value;
     const chosenShop = document.getElementById("filterShop").value;
-    const list = getFilteredList();
+    const list = getFiltered();
 
     if (!list.length) {
-      tbody.innerHTML = `<tr><td colspan="12" style="text-align:center; padding:16px; color:#666;">Нема трансфери за избраниот филтер.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding:16px; color:#666;">Нема трансфери за избраниот филтер.</td></tr>`;
       return;
     }
 
     tbody.innerHTML = list.map((t) => {
-      const pillCls =
-        t.status === "Завршен" ? "st-zavrsen" :
-        t.status === "Во транзит" ? "st-tranzit" : "st-najaven";
+      const bCls =
+        t.status === "Завршен" ? "b-zavrsen" :
+        t.status === "Во транзит" ? "b-tranzit" : "b-najaven";
 
-      const isWhRole = (role === "warehouse" || role === "admin");
+      const isWh = (role === "warehouse" || role === "admin");
 
-      const whRecCell = t.warehouseReceived
-        ? `<span style="color:var(--success); font-weight:bold;">Примено</span><span class="hint-small">${esc(t.warehouseReceivedTime || "")}</span>`
-        : (isWhRole
-            ? `<button class="btn btn-pink" style="padding:3px 7px; font-size:11px;" onclick="whRecv('${t.id}')">Прими</button>`
-            : `<span class="hint-small">Се чека магацин</span>`);
+      const whRec = t.warehouseReceived
+        ? `<span style="color:var(--success); font-weight:bold;">Примено</span><span class="sub-note">(${esc(t.warehouseReceivedTime || "")})</span>`
+        : (isWh
+            ? `<button class="btn btn-pink" style="padding:3px 7px; font-size:11px;" onclick="whReceive('${t.id}')">Прими</button>`
+            : `<span class="sub-note">Се чека магацин</span>`);
 
-      const whSentCell = t.warehouseSent
-        ? `<span style="color:var(--info); font-weight:bold;">Испратено</span><span class="hint-small">${esc(t.warehouseSentTime || "")}</span>`
-        : (isWhRole && t.warehouseReceived
+      const whSent = t.warehouseSent
+        ? `<span style="color:var(--info); font-weight:bold;">Испратено</span><span class="sub-note">${esc(t.warehouseDriver || "")} (${esc(t.warehouseSentTime || "")})</span>`
+        : (isWh && t.warehouseReceived
             ? `<button class="btn btn-gray" style="padding:3px 7px; font-size:11px;" onclick="whSend('${t.id}')">Испрати</button>`
-            : `<span class="hint-small">${t.warehouseReceived ? "Се чека испраќање" : "-"}</span>`);
+            : `<span class="sub-note">${t.warehouseReceived ? "Се чека испраќање" : "-"}</span>`);
 
-      const whDriverCell = t.warehouseDriver
-        ? `<strong>${esc(t.warehouseDriver)}</strong>`
-        : `<span class="hint-small">-</span>`;
+      const matchReceiver = (role === "receiver" && chosenShop && chosenShop === t.to);
+      const canConfirm = !t.receiverConfirmed && (role === "admin" || matchReceiver);
 
-      const allowedReceiver = (role === "receiver" && chosenShop && chosenShop === t.to);
-      const canCheck = !t.receiverConfirmed && (role === "admin" || allowedReceiver);
-
-      let recvCell = "";
+      let recCell = "";
       if (t.receiverConfirmed) {
-        recvCell = `<span style="color:var(--success); font-weight:bold;">✔ Примено</span><span class="hint-small">${esc(t.receiverConfirmedTime || "")}</span>`;
-      } else if (canCheck) {
-        recvCell = `<label class="check-box"><input type="checkbox" onchange="recConfirm('${t.id}', this)"> Прием</label>`;
+        recCell = `<span style="color:var(--success); font-weight:bold;">✔ Примено</span><span class="sub-note">(${esc(t.receiverConfirmedTime || "")})</span>`;
+      } else if (canConfirm) {
+        recCell = `<label class="chk-wrap"><input type="checkbox" onchange="confirmRec('${t.id}', this)"> Прием</label>`;
       } else {
         let note = "Заклучено";
         if (role === "receiver" && !chosenShop) note = "Избери дуќан во филтер";
         else if (role === "receiver" && chosenShop !== t.to) note = `Само за ${esc(t.to)}`;
-        recvCell = `<label class="check-box" style="opacity:0.5;"><input type="checkbox" disabled> Прием</label><span class="hint-small">${note}</span>`;
+        recCell = `<label class="chk-wrap" style="opacity:0.5;"><input type="checkbox" disabled> Прием</label><span class="sub-note">${note}</span>`;
       }
 
       const actCell = role === "admin"
-        ? `<div style="display:flex; gap:4px;"><button class="btn btn-blue" onclick="openEdit('${t.id}')">Уреди</button><button class="btn btn-red" onclick="delTransfer('${t.id}')">Избриши</button></div>`
-        : `<span class="hint-small">Увид</span>`;
+        ? `<div style="display:flex; gap:4px;"><button class="btn btn-blue" onclick="openEdit('${t.id}')">Уреди</button><button class="btn btn-red" onclick="delRow('${t.id}')">Избриши</button></div>`
+        : `<span class="sub-note">Увид</span>`;
 
       return `
         <tr>
-          <td><span class="status-pill ${pillCls}">${esc(t.status || "Најавен")}</span></td>
+          <td><span class="badge ${bCls}">${esc(t.status || "Најавен")}</span></td>
           <td><strong>${esc(t.from || "")}</strong></td>
           <td><strong>${esc(t.to || "")}</strong></td>
           <td>${esc(t.doc || "")}</td>
           <td>${esc(String(t.packages || ""))}</td>
           <td>${esc(t.driver || "")}</td>
           <td>${esc(t.createdAt || "")}</td>
-          <td>${whRecCell}</td>
-          <td>${whSentCell}</td>
-          <td>${whDriverCell}</td>
-          <td>${recvCell}</td>
+          <td>${whRec}</td>
+          <td>${whSent}</td>
+          <td>${recCell}</td>
           <td>${actCell}</td>
         </tr>
       `;
     }).join("");
   }
 
-  function whRecv(id) {
+  function whReceive(id) {
     db.ref(`transfers/${id}`).update({
       warehouseReceived: true,
-      warehouseReceivedTime: fmtDate(new Date()),
+      warehouseReceivedTime: formatDt(new Date()),
       status: "Во транзит"
     });
   }
 
   function whSend(id) {
-    const d = prompt("Возач од магацин:") || "-";
+    const drv = prompt("Возач / превозник од магацин:") || "-";
     db.ref(`transfers/${id}`).update({
       warehouseSent: true,
-      warehouseSentTime: fmtDate(new Date()),
-      warehouseDriver: d,
+      warehouseSentTime: formatDt(new Date()),
+      warehouseDriver: drv,
       status: "Во транзит"
     });
   }
 
-  function recConfirm(id, cb) {
-    const item = transfersData[id];
+  function confirmRec(id, cb) {
+    const item = transfers[id];
     const role = document.getElementById("roleSelect").value;
     const chosenShop = document.getElementById("filterShop").value;
 
@@ -840,21 +814,21 @@
     }
     db.ref(`transfers/${id}`).update({
       receiverConfirmed: true,
-      receiverConfirmedTime: fmtDate(new Date()),
+      receiverConfirmedTime: formatDt(new Date()),
       status: "Завршен"
     });
   }
 
-  function delTransfer(id) {
+  function delRow(id) {
     if (document.getElementById("roleSelect").value !== "admin") return;
     if (!confirm("Да се избрише трансферот трајно?")) return;
     db.ref(`transfers/${id}`).remove();
   }
 
   function openEdit(id) {
-    const t = transfersData[id];
+    const t = transfers[id];
     if (!t) return;
-    document.getElementById("editKey").value = id;
+    document.getElementById("editId").value = id;
     document.getElementById("editFrom").value = t.from || "";
     document.getElementById("editTo").value = t.to || "";
     document.getElementById("editDoc").value = t.doc || "";
@@ -865,12 +839,12 @@
     document.getElementById("editModal").classList.add("open");
   }
 
-  function closeEdit() {
+  function closeEditModal() {
     document.getElementById("editModal").classList.remove("open");
   }
 
-  function saveEdit() {
-    const id = document.getElementById("editKey").value;
+  function saveEditModal() {
+    const id = document.getElementById("editId").value;
     const st = document.getElementById("editStatus").value;
     const upd = {
       from: document.getElementById("editFrom").value,
@@ -883,24 +857,27 @@
     };
     if (st !== "Завршен") upd.receiverConfirmed = false;
     db.ref(`transfers/${id}`).update(upd);
-    closeEdit();
+    closeEditModal();
   }
 
   function updateStats() {
-    const arr = Object.values(transfersData);
-    document.getElementById("stTotal").textContent = arr.length;
-    document.getElementById("stNajaveni").textContent = arr.filter(x => x.status === "Најавен").length;
-    document.getElementById("stTranzit").textContent = arr.filter(x => x.status === "Во транзит").length;
-    document.getElementById("stZavrseni").textContent = arr.filter(x => x.status === "Завршен").length;
+    const arr = Object.values(transfers);
+    document.getElementById("sTotal").textContent = arr.length;
+    document.getElementById("sNajaveni").textContent = arr.filter(x => x.status === "Најавен").length;
+    document.getElementById("sTranzit").textContent = arr.filter(x => x.status === "Во транзит").length;
+    document.getElementById("sZavrseni").textContent = arr.filter(x => x.status === "Завршен").length;
   }
 
   function exportExcel() {
-    const rows = getFilteredList();
+    const rows = getFiltered();
     if (!rows.length) return alert("Нема податоци за експорт.");
 
-    let html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><tr><th>Статус</th><th>Испраќач</th><th>Примач</th><th>Бр. Документ</th><th>Бр. Пакети</th><th>Возач</th><th>Датум</th><th>Прием магацин</th><th>Испратено магацин</th><th>Возач (Магацин)</th><th>Потврда прием</th></tr>`;
+    let html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><tr><th>Статус</th><th>Испраќач</th><th>Примач</th><th>Бр. Документ</th><th>Бр. Пакети</th><th>Возач</th><th>Датум</th><th>Прием магацин</th><th>Испратено магацин (Возач)</th><th>Потврда прием</th></tr>`;
     rows.forEach((t) => {
-      html += `<tr><td>${esc(t.status || "")}</td><td>${esc(t.from || "")}</td><td>${esc(t.to || "")}</td><td>${esc(t.doc || "")}</td><td>${esc(String(t.packages || ""))}</td><td>${esc(t.driver || "")}</td><td>${esc(t.createdAt || "")}</td><td>${t.warehouseReceived ? "Примено" : "Не"}</td><td>${t.warehouseSent ? "Испратено" : "Не"}</td><td>${esc(t.warehouseDriver || "")}</td><td>${t.receiverConfirmed ? "Примено" : "Не"}</td></tr>`;
+      const whR = t.warehouseReceived ? `Примено (${t.warehouseReceivedTime || ""})` : "Не";
+      const whS = t.warehouseSent ? `Испратено - ${t.warehouseDriver || ""} (${t.warehouseSentTime || ""})` : "Не";
+      const rec = t.receiverConfirmed ? `Примено (${t.receiverConfirmedTime || ""})` : "Не";
+      html += `<tr><td>${esc(t.status || "")}</td><td>${esc(t.from || "")}</td><td>${esc(t.to || "")}</td><td>${esc(t.doc || "")}</td><td>${esc(String(t.packages || ""))}</td><td>${esc(t.driver || "")}</td><td>${esc(t.createdAt || "")}</td><td>${esc(whR)}</td><td>${esc(whS)}</td><td>${esc(rec)}</td></tr>`;
     });
     html += `</table></body></html>`;
 
@@ -915,12 +892,12 @@
     URL.revokeObjectURL(url);
   }
 
-  function fmtDate(d) {
+  function formatDt(d) {
     const p = (n) => String(n).padStart(2, "0");
     return `${p(d.getDate())}.${p(d.getMonth() + 1)}.${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`;
   }
 
-  function parseDateToIso(s) {
+  function toIsoDate(s) {
     if (!s) return "";
     const m1 = s.match(/(\d{1,2})\.(\d{1,2})\.(\d{4})/);
     if (m1) return `${m1[3]}-${m1[2].padStart(2, "0")}-${m1[1].padStart(2, "0")}`;
