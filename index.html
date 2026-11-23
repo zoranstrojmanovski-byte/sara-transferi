@@ -6,7 +6,7 @@
   <title>Sara Fashion - Централна Евиденција на Трансфери (Realtime)</title>
 
   <!-- PWA Manifest & Custom Black/Pink Icon -->
-  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Sara%20Fashion%20Transferi%22%2C%22short_name%22%3A%22SaraFashion%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23000000%22%2C%22theme_color%22%3A%22%23ff1493%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'512'%20height%3D'512'%3E%3Crect%20width%3D'100%25'%20height%3D'100%25'%20fill%3D'%23000000'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'50%25'%20fill%3D'%23ff1493'%20font-size%3D'70'%20font-family%3D'Arial%2C%20sans-serif'%20font-weight%3D'bold'%20text-anchor%3D'middle'%20dominant-baseline%3D'middle'%3ESARA%3C%2Ftext%3E%3Ctext%20x%3D'50%25'%20y%3D'65%25'%20fill%3D'%23ffd700'%20font-size%3D'45'%20font-family%3D'Arial%2C%20sans-serif'%20font-weight%3D'bold'%20text-anchor%3D'middle'%20dominant-baseline%3D'middle'%3EFASHION%3C%2Ftext%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Sara%20Fashion%20Transferi%22%2C%22short_name%22%3A%22SaraFashion%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23000000%22%2C%22theme_color%22%3A%22%23ff1493%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'512'%20height%3D'512'%3E%3Crect%20width%3D'100%25'%20height%3D'100%25'%20fill%3D'%23000000'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'50%25'%20fill%3D'%23ff1493'%20font-size%3D'70'%20font-family%3D'Arial%2C%20sans-serif'%20font-weight%3D'bold'%20text-anchor%3D'middle'%20dominant-baseline%3D'middle'%3ESARA%3C%2Ftext%3E%3Ctext%20x%3D'50%25'%20y%3D'65%25'%20fill%3D'%23ffd700'%20font-size%3D'45'%20font-family%3D'Arial%2C%20sans-serif'%20font-weight%3D'bold'%20text-anchor%3D'middle'%20dominant-baseline%3D'middle'%3EFASHION%3C%2Ftext%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
   <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512'><rect width='100%' height='100%' fill='%23000000'/><text x='50%' y='48%' fill='%23ff1493' font-size='75' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>SARA</text><text x='50%' y='64%' fill='%23ffd700' font-size='50' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>FASHION</text></svg>">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512'><rect width='100%' height='100%' fill='%23000000'/><text x='50%' y='48%' fill='%23ff1493' font-size='75' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>SARA</text><text x='50%' y='64%' fill='%23ffd700' font-size='50' font-family='Arial, sans-serif' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>FASHION</text></svg>">
 
@@ -16,233 +16,240 @@
 
   <style>
     :root {
-      --primary: #ff1493;
-      --primary-dark: #d8007c;
-      --gold: #d4af37;
-      --success: #16a34a;
-      --warning: #ca8a04;
-      --danger: #dc2626;
-      --bg: #f4f6f9;
-      --card-bg: #ffffff;
-      --text: #1e293b;
-      --border: #cbd5e1;
+      --primary: #e91e63;
+      --primary-dark: #c2185b;
+      --soft-pink: #fce4ec;
+      --soft-pink-border: #f8bbd0;
+      --success: #2e7d32;
+      --warning: #ed6c02;
+      --info: #0288d1;
+      --danger: #d32f2f;
+      --bg: #f5f5f7;
+      --card: #ffffff;
+      --text: #222222;
+      --muted: #666666;
+      --line: #e0e0e0;
     }
 
-    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { margin: 0; background-color: var(--bg); color: var(--text); padding: 16px; }
+    * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+    body { margin: 0; background: var(--bg); color: var(--text); padding: 14px; }
+    .page { max-width: 1380px; margin: 0 auto; }
 
-    .container { max-width: 1400px; margin: 0 auto; }
-
-    /* Header */
-    .header {
-      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-      color: #fff;
-      padding: 18px 22px;
-      border-radius: 12px;
+    /* Top Header */
+    .top-bar {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 18px;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 15px;
-      border-bottom: 4px solid var(--primary);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    }
-    .header h1 { margin: 0; font-size: 22px; color: var(--primary); }
-    .header p { margin: 4px 0 0; font-size: 13px; color: #e2e8f0; }
-
-    .header-controls {
-      display: flex;
       flex-wrap: wrap;
-      align-items: center;
       gap: 12px;
+      border-bottom: 2px solid var(--primary);
+      margin-bottom: 14px;
+    }
+    .top-bar h1 { margin: 0; font-size: 20px; color: var(--primary); }
+    .top-bar small { color: var(--muted); font-size: 12px; }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .role-box {
-      background: rgba(255,255,255,0.08);
-      padding: 8px 14px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.15);
+    .role-wrap {
+      display: flex;
+      flex-direction: column;
+      font-size: 11px;
+      color: var(--muted);
     }
-    .role-box label { display: block; font-size: 11px; color: #cbd5e1; margin-bottom: 4px; }
-    .role-box select {
+    .role-wrap select {
+      margin-top: 3px;
       padding: 6px 10px;
-      border-radius: 6px;
-      border: 1px solid var(--primary);
-      font-weight: 600;
+      border: 1px solid #bbb;
+      border-radius: 5px;
+      font-weight: bold;
       background: #fff;
-      color: #111827;
+      color: var(--text);
     }
 
     /* Buttons */
     .btn {
-      padding: 9px 15px;
       border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 13px;
+      border-radius: 5px;
+      padding: 8px 13px;
+      font-size: 12px;
+      font-weight: bold;
       cursor: pointer;
-      transition: 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
-    .btn-primary { background: var(--primary); color: #fff; }
-    .btn-primary:hover { background: var(--primary-dark); }
-    .btn-excel { background: #15803d; color: #fff; }
-    .btn-excel:hover { background: #166534; }
-    .btn-notify-off { background: #475569; color: #fff; }
-    .btn-notify-on { background: #eab308; color: #111827; box-shadow: 0 0 10px rgba(234,179,8,0.6); }
-    .btn-secondary { background: #64748b; color: #fff; }
-    .btn-secondary:hover { background: #475569; }
-    .btn-danger { background: var(--danger); color: #fff; padding: 5px 10px; font-size: 12px; }
-    .btn-edit { background: #0284c7; color: #fff; padding: 5px 10px; font-size: 12px; }
+    .btn-pink { background: var(--primary); color: #fff; }
+    .btn-pink:hover { background: var(--primary-dark); }
+    .btn-green { background: #2e7d32; color: #fff; }
+    .btn-green:hover { background: #1b5e20; }
+    .btn-notify-off { background: #e0e0e0; color: #333; }
+    .btn-notify-on { background: #fff176; color: #111; border: 1px solid #fbc02d; }
+    .btn-gray { background: #757575; color: #fff; }
+    .btn-red { background: var(--danger); color: #fff; padding: 4px 8px; font-size: 11px; }
+    .btn-blue { background: var(--info); color: #fff; padding: 4px 8px; font-size: 11px; }
 
-    /* Stats */
-    .stats-grid {
+    /* Stats Strip */
+    .stats-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
-      margin: 18px 0;
-    }
-    .stat-card {
-      background: var(--card-bg);
-      padding: 16px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      border-left: 5px solid var(--primary);
-    }
-    .stat-card.warn { border-left-color: var(--warning); }
-    .stat-card.info { border-left-color: #0284c7; }
-    .stat-card.ok { border-left-color: var(--success); }
-    .stat-card span { font-size: 13px; color: #64748b; font-weight: 600; }
-    .stat-card strong { display: block; font-size: 26px; margin-top: 6px; color: #0f172a; }
-
-    /* Cards */
-    .card {
-      background: var(--card-bg);
-      padding: 18px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      margin-bottom: 18px;
-    }
-    .card h2 { margin: 0 0 14px; font-size: 17px; color: #0f172a; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 12px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 800px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+
+    .stat-box {
+      background: var(--card);
+      border-radius: 8px;
+      padding: 12px 14px;
+      border-left: 4px solid var(--primary);
+    }
+    .stat-box.najaven { border-left-color: var(--warning); }
+    .stat-box.tranzit { border-left-color: var(--info); }
+    .stat-box.zavrsen { border-left-color: var(--success); }
+    .stat-box .label { font-size: 12px; color: var(--muted); display: block; }
+    .stat-box .num { font-size: 24px; font-weight: bold; margin-top: 4px; display: block; }
+
+    /* Section Cards */
+    .section-card {
+      background: var(--card);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      border: 1px solid var(--line);
+    }
+    .section-card.pink-tint {
+      background: var(--soft-pink);
+      border-color: var(--soft-pink-border);
+    }
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 15px;
+      font-weight: bold;
+      color: var(--text);
+    }
+
+    .grid-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 10px;
       align-items: end;
     }
-    .field label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #334155; }
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 4px;
+      color: #444;
+    }
     .field input, .field select {
       width: 100%;
-      padding: 9px 11px;
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      font-size: 13px;
+      padding: 7px 9px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 12px;
       background: #fff;
     }
 
     /* Table */
     .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    th, td { padding: 10px 9px; border-bottom: 1px solid #e2e8f0; text-align: left; vertical-align: middle; }
-    th { background: #f8fafc; font-weight: 700; color: #334155; white-space: nowrap; }
-    tr:hover { background: #fdf2f8; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td {
+      padding: 8px 7px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: middle;
+    }
+    th { background: #fafafa; font-weight: bold; color: #333; white-space: nowrap; }
+    tr:hover { background: #fff8fb; }
 
-    .badge {
-      padding: 4px 9px;
-      border-radius: 20px;
+    .status-pill {
+      padding: 3px 8px;
+      border-radius: 12px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: bold;
       display: inline-block;
       white-space: nowrap;
     }
-    .badge-najaven { background: #fef3c7; color: #92400e; }
-    .badge-tranzit { background: #e0f2fe; color: #075985; }
-    .badge-zavrsen { background: #dcfce7; color: #166534; }
+    .st-najaven { background: #fff3e0; color: #e65100; }
+    .st-tranzit { background: #e1f5fe; color: #01579b; }
+    .st-zavrsen { background: #e8f5e9; color: #1b5e20; }
 
-    .locked-note { font-size: 11px; color: #64748b; display: block; margin-top: 2px; }
-    .check-label { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; }
-    .check-label input:disabled { cursor: not-allowed; }
+    .hint-small { font-size: 10px; color: var(--muted); display: block; margin-top: 2px; }
+    .check-box { display: inline-flex; align-items: center; gap: 5px; font-weight: bold; cursor: pointer; }
 
-    /* Toast Notification */
-    #toastContainer {
+    /* Toast */
+    #toastBox {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 16px;
+      right: 16px;
       z-index: 9999;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      max-width: 360px;
+      gap: 8px;
+      max-width: 340px;
     }
-    .toast {
-      background: #111827;
+    .toast-item {
+      background: #222;
       color: #fff;
-      border-left: 5px solid var(--primary);
-      padding: 14px 16px;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-      font-size: 13px;
-      line-height: 1.4;
-      animation: slideIn 0.3s ease;
-    }
-    .toast strong { color: #f472b6; display: block; margin-bottom: 3px; }
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+      border-left: 4px solid var(--primary);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     /* Modal */
-    .modal-backdrop {
+    .modal-bg {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(0,0,0,0.5);
       z-index: 1000;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 12px;
     }
-    .modal-backdrop.open { display: flex; }
-    .modal {
+    .modal-bg.open { display: flex; }
+    .modal-box {
       background: #fff;
-      border-radius: 12px;
-      padding: 20px;
+      padding: 18px;
+      border-radius: 8px;
       width: 100%;
-      max-width: 520px;
+      max-width: 480px;
       max-height: 90vh;
       overflow-y: auto;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
-    .modal h3 { margin-top: 0; color: var(--primary); }
-    .shop-list { list-style: none; padding: 0; margin: 12px 0; max-height: 220px; overflow-y: auto; border: 1px solid #e2e8f0; border-radius: 8px; }
-    .shop-list li { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+    .shop-ul { list-style: none; padding: 0; margin: 10px 0 0; max-height: 180px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; }
+    .shop-ul li { display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; border-bottom: 1px solid #eee; font-size: 12px; }
   </style>
 </head>
 <body>
+<div class="page">
 
-<div class="container">
-  <!-- HEADER -->
-  <div class="header">
+  <!-- TOP HEADER -->
+  <div class="top-bar">
     <div>
       <h1>Sara Fashion - Управување со Трансфери (Cloud)</h1>
-      <p>Синхронизација во реално време за 70 локации (Строга контрола)</p>
+      <small>Синхронизација во реално време за 70 локации (Строга контрола)</small>
     </div>
 
-    <div class="header-controls">
-      <button id="btnAutoNotify" class="btn btn-notify-off" onclick="toggleAutoNotify()">
+    <div class="top-actions">
+      <button id="autoNotifyBtn" class="btn btn-notify-off" onclick="toggleAutoNotify()">
         🔔 Автоматско известување: ИСКЛУЧЕНО
       </button>
 
-      <button class="btn btn-excel" onclick="exportToExcel()">
+      <button class="btn btn-green" onclick="exportExcel()">
         📊 Експорт во Excel
       </button>
 
-      <div class="role-box">
+      <div class="role-wrap">
         <label for="roleSelect">Тековна улога:</label>
-        <select id="roleSelect" onchange="handleRoleChange()">
+        <select id="roleSelect" onchange="onRoleChange()">
           <option value="sender">Испраќач (Продавница)</option>
           <option value="receiver">Примач (Продавница)</option>
           <option value="warehouse">Магационер (Централен магацин)</option>
@@ -253,51 +260,51 @@
   </div>
 
   <!-- STATS -->
-  <div class="stats-grid">
-    <div class="stat-card">
-      <span>Вкупно трансфери</span>
-      <strong id="statTotal">0</strong>
+  <div class="stats-row">
+    <div class="stat-box">
+      <span class="label">Вкупно трансфери</span>
+      <span class="num" id="stTotal">0</span>
     </div>
-    <div class="stat-card warn">
-      <span>Најавени</span>
-      <strong id="statNajaveni">0</strong>
+    <div class="stat-box najaven">
+      <span class="label">Најавени</span>
+      <span class="num" id="stNajaveni">0</span>
     </div>
-    <div class="stat-card info">
-      <span>Во транзит</span>
-      <strong id="statTranzit">0</strong>
+    <div class="stat-box tranzit">
+      <span class="label">Во транзит</span>
+      <span class="num" id="stTranzit">0</span>
     </div>
-    <div class="stat-card ok">
-      <span>Завршени</span>
-      <strong id="statZavrseni">0</strong>
+    <div class="stat-box zavrsen">
+      <span class="label">Завршени</span>
+      <span class="num" id="stZavrseni">0</span>
     </div>
   </div>
 
-  <!-- ADMIN PANEL (Visible only for Admin) -->
-  <div id="adminPanel" class="card" style="display:none; border: 2px solid var(--primary);">
-    <h2>Администраторски Поставки</h2>
-    <div class="form-grid">
+  <!-- ADMIN BOX -->
+  <div id="adminBox" class="section-card" style="display:none; border-color: var(--primary);">
+    <div class="section-title">Администраторски поставки</div>
+    <div class="grid-form">
       <div class="field">
         <label>Нов дуќан / локација:</label>
-        <input type="text" id="newShopName" placeholder="пр. Дуќан 71 или ГТЦ">
+        <input type="text" id="newShopInput" placeholder="пр. Дуќан 71">
       </div>
       <div>
-        <button class="btn btn-primary" onclick="addShop()">+ Додај дуќан</button>
+        <button class="btn btn-pink" onclick="addShop()">+ Додај дуќан</button>
       </div>
       <div class="field">
-        <label>Промени Admin PIN:</label>
-        <input type="password" id="newAdminPin" placeholder="Нов PIN код">
+        <label>Нов Admin PIN:</label>
+        <input type="password" id="newPinInput" placeholder="Нов PIN">
       </div>
       <div>
-        <button class="btn btn-secondary" onclick="changeAdminPin()">Зачувај нов PIN</button>
+        <button class="btn btn-gray" onclick="saveNewPin()">Зачувај PIN</button>
       </div>
     </div>
-    <ul id="adminShopList" class="shop-list"></ul>
+    <ul id="shopAdminList" class="shop-ul"></ul>
   </div>
 
-  <!-- CREATE TRANSFER FORM (Visible for Sender & Admin) -->
-  <div id="senderCard" class="card">
-    <h2>Креирај нов најавен трансфер (Испраќач)</h2>
-    <div class="form-grid">
+  <!-- CREATE TRANSFER BOX -->
+  <div id="createBox" class="section-card pink-tint">
+    <div class="section-title">Креирај нов најавен трансфер (Испраќач)</div>
+    <div class="grid-form">
       <div class="field">
         <label>Од дуќан (Испраќач):</label>
         <select id="fromShop"></select>
@@ -308,28 +315,26 @@
       </div>
       <div class="field">
         <label>Број на документ:</label>
-        <input type="text" id="docNumber" placeholder="пр. ТР-1025">
+        <input type="text" id="docInput" placeholder="пр. ТР-1025">
       </div>
       <div class="field">
         <label>Број на пакети:</label>
-        <input type="number" id="packagesCount" min="1" placeholder="пр. 5">
+        <input type="number" id="pkgInput" min="1" placeholder="пр. 5">
       </div>
       <div class="field">
         <label>Возач:</label>
-        <input type="text" id="driverName" placeholder="пр. Марјан Возач">
+        <input type="text" id="driverInput" placeholder="пр. Марјан Возач">
       </div>
       <div>
-        <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="createTransfer()">
-          Зачувај најава
-        </button>
+        <button class="btn btn-pink" style="width:100%;" onclick="addTransfer()">Зачувај најава</button>
       </div>
     </div>
   </div>
 
-  <!-- FILTERS & TABLE -->
-  <div class="card">
-    <h2>Преглед на трансфери и филтрирање</h2>
-    <div class="form-grid" style="margin-bottom: 16px;">
+  <!-- FILTER & TABLE BOX -->
+  <div class="section-card pink-tint">
+    <div class="section-title">Преглед на трансфери и филтрирање</div>
+    <div class="grid-form" style="margin-bottom: 12px;">
       <div class="field">
         <label>Избери дуќан (Филтер):</label>
         <select id="filterShop" onchange="onFilterShopChange()">
@@ -338,7 +343,7 @@
       </div>
       <div class="field">
         <label>Тип на приказ:</label>
-        <select id="filterDirection" onchange="renderTable()">
+        <select id="filterType" onchange="renderTable()">
           <option value="all">Испратени и Примени</option>
           <option value="sent">Само испратени</option>
           <option value="received">Само примени</option>
@@ -346,20 +351,18 @@
       </div>
       <div class="field">
         <label>Од датум:</label>
-        <input type="date" id="filterDateFrom" onchange="renderTable()">
+        <input type="date" id="dateFrom" onchange="renderTable()">
       </div>
       <div class="field">
         <label>До датум:</label>
-        <input type="date" id="filterDateTo" onchange="renderTable()">
+        <input type="date" id="dateTo" onchange="renderTable()">
       </div>
       <div>
-        <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="resetFilters()">
-          Ресетирај филтри
-        </button>
+        <button class="btn btn-pink" style="width:100%;" onclick="resetAllFilters()">Ресетирај филтри</button>
       </div>
     </div>
 
-    <div class="table-wrap">
+    <div class="table-wrap" style="background:#fff; border-radius:6px; padding:6px;">
       <table>
         <thead>
           <tr>
@@ -376,38 +379,39 @@
             <th>Акции (Админ / Увид)</th>
           </tr>
         </thead>
-        <tbody id="transfersBody"></tbody>
+        <tbody id="tableBody"></tbody>
       </table>
     </div>
   </div>
+
 </div>
 
-<!-- EDIT MODAL (Admin) -->
-<div id="editModal" class="modal-backdrop">
-  <div class="modal">
-    <h3>Уреди трансфер (Администратор)</h3>
-    <input type="hidden" id="editId">
-    <div class="field" style="margin-bottom:10px;">
+<!-- EDIT MODAL -->
+<div id="editModal" class="modal-bg">
+  <div class="modal-box">
+    <h3 style="margin-top:0; color:var(--primary);">Уреди трансфер</h3>
+    <input type="hidden" id="editKey">
+    <div class="field" style="margin-bottom:8px;">
       <label>Испраќач:</label>
       <select id="editFrom"></select>
     </div>
-    <div class="field" style="margin-bottom:10px;">
+    <div class="field" style="margin-bottom:8px;">
       <label>Примач:</label>
       <select id="editTo"></select>
     </div>
-    <div class="field" style="margin-bottom:10px;">
+    <div class="field" style="margin-bottom:8px;">
       <label>Број на документ:</label>
       <input type="text" id="editDoc">
     </div>
-    <div class="field" style="margin-bottom:10px;">
+    <div class="field" style="margin-bottom:8px;">
       <label>Број на пакети:</label>
-      <input type="number" id="editPackages" min="1">
+      <input type="number" id="editPkg" min="1">
     </div>
-    <div class="field" style="margin-bottom:10px;">
+    <div class="field" style="margin-bottom:8px;">
       <label>Возач:</label>
       <input type="text" id="editDriver">
     </div>
-    <div class="field" style="margin-bottom:10px;">
+    <div class="field" style="margin-bottom:8px;">
       <label>Статус:</label>
       <select id="editStatus">
         <option value="Најавен">Најавен</option>
@@ -415,33 +419,31 @@
         <option value="Завршен">Завршен</option>
       </select>
     </div>
-    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:16px;">
-      <button class="btn btn-secondary" onclick="closeEditModal()">Откажи</button>
-      <button class="btn btn-primary" onclick="saveEditModal()">Зачувај измени</button>
+    <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:12px;">
+      <button class="btn btn-gray" onclick="closeEdit()">Откажи</button>
+      <button class="btn btn-pink" onclick="saveEdit()">Зачувај</button>
     </div>
   </div>
 </div>
 
-<!-- TOAST NOTIFICATIONS -->
-<div id="toastContainer"></div>
+<div id="toastBox"></div>
 
 <script>
-  // Firebase Configuration (existing database - no data will be lost)
   const firebaseConfig = {
     databaseURL: "https://sarafashion-transferi-default-rtdb.europe-west1.firebasedatabase.app"
   };
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  let transfers = {};
-  let shops = [];
-  let adminPin = "1234";
-  let isAdminAuthenticated = false;
-  let autoNotifyEnabled = false;
-  let initialLoadDone = false;
-  let lastKnownSnapshot = {};
+  let transfersData = {};
+  let shopsList = [];
+  let currentPin = "1234";
+  let adminUnlocked = false;
+  let notifyOn = false;
+  let firstSyncDone = false;
+  let prevSnapshot = {};
 
-  const defaultShops = [
+  const fallbackShops = [
     "Централен Магацин",
     "Дуќан Центар",
     "Дуќан Аеродром",
@@ -452,73 +454,62 @@
     "Дуќан Тетово"
   ];
 
-  // Load config (PIN)
-  db.ref("config/adminPin").on("value", (snap) => {
-    if (snap.exists()) {
-      adminPin = String(snap.val());
-    }
+  db.ref("config/adminPin").on("value", (s) => {
+    if (s.exists()) currentPin = String(s.val());
   });
 
-  // Load shops
-  db.ref("shops").on("value", (snap) => {
-    const val = snap.val();
-    if (val && Array.isArray(val) && val.length > 0) {
-      shops = val;
+  db.ref("shops").on("value", (s) => {
+    const val = s.val();
+    if (Array.isArray(val) && val.length) {
+      shopsList = val;
     } else if (val && typeof val === "object") {
-      shops = Object.values(val);
+      shopsList = Object.values(val);
     } else {
-      shops = [...defaultShops];
-      db.ref("shops").set(shops);
+      shopsList = [...fallbackShops];
+      db.ref("shops").set(shopsList);
     }
-    populateShopDropdowns();
-    renderAdminShops();
+    fillShopSelects();
+    renderShopAdmin();
     renderTable();
   });
 
-  // Load transfers in realtime
-  db.ref("transfers").on("value", (snap) => {
-    const newData = snap.val() || {};
-
-    if (initialLoadDone && autoNotifyEnabled) {
-      checkForChangesAndNotify(lastKnownSnapshot, newData);
+  db.ref("transfers").on("value", (s) => {
+    const incoming = s.val() || {};
+    if (firstSyncDone && notifyOn) {
+      detectAndNotify(prevSnapshot, incoming);
     }
-
-    lastKnownSnapshot = JSON.parse(JSON.stringify(newData));
-    transfers = newData;
-    initialLoadDone = true;
-
+    prevSnapshot = JSON.parse(JSON.stringify(incoming));
+    transfersData = incoming;
+    firstSyncDone = true;
     updateStats();
     renderTable();
   });
 
-  // Restore saved filter shop if previously selected on this device
   window.addEventListener("DOMContentLoaded", () => {
-    const savedNotify = localStorage.getItem("sf_auto_notify");
-    if (savedNotify === "1") {
-      autoNotifyEnabled = true;
-      updateNotifyButtonUI();
+    if (localStorage.getItem("sf_notify_on") === "1") {
+      notifyOn = true;
+      refreshNotifyBtn();
     }
   });
 
   function toggleAutoNotify() {
-    autoNotifyEnabled = !autoNotifyEnabled;
-    localStorage.setItem("sf_auto_notify", autoNotifyEnabled ? "1" : "0");
-    updateNotifyButtonUI();
-
-    if (autoNotifyEnabled) {
-      playBeep();
-      showToast("Автоматско известување вклучено", "Ќе добивате звучно и визуелно известување за секој нов трансфер или промена.");
+    notifyOn = !notifyOn;
+    localStorage.setItem("sf_notify_on", notifyOn ? "1" : "0");
+    refreshNotifyBtn();
+    if (notifyOn) {
+      beep();
+      pushToast("Автоматско известување е ВКЛУЧЕНО", "Ќе бидете известени при нов трансфер или промена на статус.");
       if ("Notification" in window && Notification.permission === "default") {
         Notification.requestPermission();
       }
     } else {
-      showToast("Известувањата се исклучени", "Нема да се појавуваат автоматски известувања.");
+      pushToast("Автоматско известување е ИСКЛУЧЕНО", "Нема автоматски известувања.");
     }
   }
 
-  function updateNotifyButtonUI() {
-    const btn = document.getElementById("btnAutoNotify");
-    if (autoNotifyEnabled) {
+  function refreshNotifyBtn() {
+    const btn = document.getElementById("autoNotifyBtn");
+    if (notifyOn) {
       btn.className = "btn btn-notify-on";
       btn.textContent = "🔔 Автоматско известување: ВКЛУЧЕНО";
     } else {
@@ -527,195 +518,175 @@
     }
   }
 
-  function playBeep() {
+  function beep() {
     try {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(880, ctx.currentTime);
-      gain.gain.setValueAtTime(0.15, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.35);
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.frequency.value = 840;
+      g.gain.setValueAtTime(0.12, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+      o.connect(g);
+      g.connect(ctx.destination);
+      o.start();
+      o.stop(ctx.currentTime + 0.3);
     } catch (e) {}
   }
 
-  function showToast(title, message) {
-    const container = document.getElementById("toastContainer");
-    const el = document.createElement("div");
-    el.className = "toast";
-    el.innerHTML = `<strong>${escapeHtml(title)}</strong><div>${escapeHtml(message)}</div>`;
-    container.appendChild(el);
-    setTimeout(() => {
-      el.remove();
-    }, 6500);
+  function pushToast(title, text) {
+    const box = document.getElementById("toastBox");
+    const d = document.createElement("div");
+    d.className = "toast-item";
+    d.innerHTML = `<strong>${esc(title)}</strong><div>${esc(text)}</div>`;
+    box.appendChild(d);
+    setTimeout(() => d.remove(), 6000);
   }
 
-  function checkForChangesAndNotify(oldMap, newMap) {
-    const selectedShop = document.getElementById("filterShop").value;
+  function detectAndNotify(oldObj, newObj) {
+    const chosenShop = document.getElementById("filterShop").value;
+    Object.keys(newObj).forEach((k) => {
+      const cur = newObj[k];
+      const old = oldObj[k];
+      if (chosenShop && cur.from !== chosenShop && cur.to !== chosenShop) return;
 
-    Object.keys(newMap).forEach((id) => {
-      const item = newMap[id];
-      const oldItem = oldMap[id];
-
-      // Filter relevance if a specific shop is selected
-      if (selectedShop && item.from !== selectedShop && item.to !== selectedShop) {
-        return;
-      }
-
-      if (!oldItem) {
-        playBeep();
-        const msg = `Нов трансфер (${item.doc || "без бр."}): Од ${item.from} кон ${item.to} (${item.packages || 1} пак.)`;
-        showToast("Нова најава на трансфер!", msg);
-        sendBrowserNotification("Sara Fashion - Нов трансфер", msg);
-      } else if (oldItem.status !== item.status) {
-        playBeep();
-        const msg = `Документ ${item.doc || ""}: ${item.from} → ${item.to} сега е со статус „${item.status}“.`;
-        showToast("Промена на статус!", msg);
-        sendBrowserNotification("Sara Fashion - Промена на статус", msg);
+      if (!old) {
+        beep();
+        const msg = `Док ${cur.doc || "-"}: Од ${cur.from} кон ${cur.to} (${cur.packages || 1} пак.)`;
+        pushToast("Нов најавен трансфер!", msg);
+        sysNotify("Sara Fashion - Нов трансфер", msg);
+      } else if (old.status !== cur.status) {
+        beep();
+        const msg = `Док ${cur.doc || "-"} (${cur.from} → ${cur.to}): ${cur.status}`;
+        pushToast("Промена на статус!", msg);
+        sysNotify("Sara Fashion - Статус", msg);
       }
     });
   }
 
-  function sendBrowserNotification(title, body) {
+  function sysNotify(t, b) {
     if ("Notification" in window && Notification.permission === "granted") {
-      try {
-        new Notification(title, { body });
-      } catch (e) {}
+      try { new Notification(t, { body: b }); } catch (e) {}
     }
   }
 
-  function handleRoleChange() {
-    const role = document.getElementById("roleSelect").value;
-    if (role === "admin") {
-      if (!isAdminAuthenticated) {
-        const entered = prompt("Внесете Администраторски PIN:");
-        if (entered === adminPin) {
-          isAdminAuthenticated = true;
+  function onRoleChange() {
+    const r = document.getElementById("roleSelect").value;
+    if (r === "admin") {
+      if (!adminUnlocked) {
+        const pin = prompt("Внесете Администраторски PIN:");
+        if (pin === currentPin) {
+          adminUnlocked = true;
         } else {
-          alert("Погрешен PIN код!");
+          alert("Погрешен PIN!");
           document.getElementById("roleSelect").value = "sender";
-          isAdminAuthenticated = false;
+          adminUnlocked = false;
         }
       }
     } else {
-      isAdminAuthenticated = false;
+      adminUnlocked = false;
     }
 
-    const activeRole = document.getElementById("roleSelect").value;
-    document.getElementById("adminPanel").style.display = activeRole === "admin" ? "block" : "none";
-    document.getElementById("senderCard").style.display = (activeRole === "sender" || activeRole === "admin") ? "block" : "none";
+    const active = document.getElementById("roleSelect").value;
+    document.getElementById("adminBox").style.display = active === "admin" ? "block" : "none";
+    document.getElementById("createBox").style.display = (active === "sender" || active === "admin") ? "block" : "none";
     renderTable();
   }
 
-  function populateShopDropdowns() {
-    const fromSel = document.getElementById("fromShop");
-    const toSel = document.getElementById("toShop");
-    const filterSel = document.getElementById("filterShop");
-    const editFrom = document.getElementById("editFrom");
-    const editTo = document.getElementById("editTo");
+  function fillShopSelects() {
+    const fSel = document.getElementById("fromShop");
+    const tSel = document.getElementById("toShop");
+    const flSel = document.getElementById("filterShop");
+    const efSel = document.getElementById("editFrom");
+    const etSel = document.getElementById("editTo");
 
-    const prevFilter = filterSel.value || localStorage.getItem("sf_selected_shop") || "";
-    const prevFrom = fromSel.value;
-    const prevTo = toSel.value;
+    const savedFilter = flSel.value || localStorage.getItem("sf_filter_shop") || "";
+    const savedFrom = fSel.value;
+    const savedTo = tSel.value;
 
-    const optionsHtml = `<option value="">Избери дуќан...</option>` +
-      shops.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join("");
+    const fromOpts = `<option value="">Избери дуќан...</option>` +
+      shopsList.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
+    const toOpts = `<option value="">Избери примач...</option>` +
+      shopsList.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
 
-    const toOptionsHtml = `<option value="">Избери примач...</option>` +
-      shops.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join("");
+    fSel.innerHTML = fromOpts;
+    tSel.innerHTML = toOpts;
+    efSel.innerHTML = fromOpts;
+    etSel.innerHTML = toOpts;
 
-    fromSel.innerHTML = optionsHtml;
-    toSel.innerHTML = toOptionsHtml;
-    editFrom.innerHTML = optionsHtml;
-    editTo.innerHTML = toOptionsHtml;
+    flSel.innerHTML = `<option value="">Сите продавници</option>` +
+      shopsList.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
 
-    filterSel.innerHTML = `<option value="">Сите продавници</option>` +
-      shops.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join("");
-
-    if (shops.includes(prevFilter)) {
-      filterSel.value = prevFilter;
-    }
-    if (shops.includes(prevFrom)) fromSel.value = prevFrom;
-    if (shops.includes(prevTo)) toSel.value = prevTo;
+    if (shopsList.includes(savedFilter)) flSel.value = savedFilter;
+    if (shopsList.includes(savedFrom)) fSel.value = savedFrom;
+    if (shopsList.includes(savedTo)) tSel.value = savedTo;
   }
 
   function onFilterShopChange() {
-    const val = document.getElementById("filterShop").value;
-    localStorage.setItem("sf_selected_shop", val);
+    localStorage.setItem("sf_filter_shop", document.getElementById("filterShop").value);
     renderTable();
   }
 
-  function resetFilters() {
+  function resetAllFilters() {
     document.getElementById("filterShop").value = "";
-    document.getElementById("filterDirection").value = "all";
-    document.getElementById("filterDateFrom").value = "";
-    document.getElementById("filterDateTo").value = "";
-    localStorage.removeItem("sf_selected_shop");
+    document.getElementById("filterType").value = "all";
+    document.getElementById("dateFrom").value = "";
+    document.getElementById("dateTo").value = "";
+    localStorage.removeItem("sf_filter_shop");
     renderTable();
   }
 
   function addShop() {
-    const input = document.getElementById("newShopName");
-    const name = input.value.trim();
+    const inp = document.getElementById("newShopInput");
+    const name = inp.value.trim();
     if (!name) return alert("Внесете име на дуќан!");
-    if (shops.includes(name)) return alert("Овој дуќан веќе постои!");
-    const updated = [...shops, name];
-    db.ref("shops").set(updated);
-    input.value = "";
+    if (shopsList.includes(name)) return alert("Веќе постои!");
+    db.ref("shops").set([...shopsList, name]);
+    inp.value = "";
   }
 
-  function removeShop(index) {
-    if (!confirm("Дали сигурно сакате да го избришете дуќанот од листата?")) return;
-    const updated = shops.filter((_, i) => i !== index);
-    db.ref("shops").set(updated);
+  function removeShop(i) {
+    if (!confirm("Да се избрише дуќанот?")) return;
+    db.ref("shops").set(shopsList.filter((_, idx) => idx !== i));
   }
 
-  function renderAdminShops() {
-    const list = document.getElementById("adminShopList");
-    list.innerHTML = shops.map((s, idx) => `
+  function renderShopAdmin() {
+    document.getElementById("shopAdminList").innerHTML = shopsList.map((s, i) => `
       <li>
-        <span>${escapeHtml(s)}</span>
-        <button class="btn btn-danger" onclick="removeShop(${idx})">Избриши</button>
+        <span>${esc(s)}</span>
+        <button class="btn btn-red" onclick="removeShop(${i})">Избриши</button>
       </li>
     `).join("");
   }
 
-  function changeAdminPin() {
-    const val = document.getElementById("newAdminPin").value.trim();
-    if (!val || val.length < 4) return alert("PIN кодот мора да има најмалку 4 знаци!");
-    db.ref("config/adminPin").set(val);
-    document.getElementById("newAdminPin").value = "";
-    alert("Администраторскиот PIN е успешно променет!");
+  function saveNewPin() {
+    const p = document.getElementById("newPinInput").value.trim();
+    if (!p || p.length < 4) return alert("PIN-от треба да има најмалку 4 знаци.");
+    db.ref("config/adminPin").set(p);
+    document.getElementById("newPinInput").value = "";
+    alert("PIN-от е променет.");
   }
 
-  function createTransfer() {
+  function addTransfer() {
     const from = document.getElementById("fromShop").value;
     const to = document.getElementById("toShop").value;
-    const doc = document.getElementById("docNumber").value.trim();
-    const packages = document.getElementById("packagesCount").value.trim();
-    const driver = document.getElementById("driverName").value.trim();
+    const doc = document.getElementById("docInput").value.trim();
+    const pkg = document.getElementById("pkgInput").value.trim();
+    const driver = document.getElementById("driverInput").value.trim();
 
-    if (!from || !to) return alert("Ве молиме изберете Испраќач и Примач!");
-    if (from === to) return alert("Испраќачот и примачот не можат да бидат ист дуќан!");
+    if (!from || !to) return alert("Изберете Испраќач и Примач!");
+    if (from === to) return alert("Испраќачот и примачот не можат да бидат исти!");
     if (!doc) return alert("Внесете број на документ!");
-    if (!packages || Number(packages) < 1) return alert("Внесете валиден број на пакети!");
+    if (!pkg || Number(pkg) < 1) return alert("Внесете број на пакети!");
 
     const now = new Date();
-    const isoDate = now.toISOString().split("T")[0];
-    const formattedDate = formatDateTime(now);
-
-    const newTransfer = {
+    db.ref("transfers").push({
       from,
       to,
       doc,
-      packages: Number(packages),
+      packages: Number(pkg),
       driver: driver || "-",
-      createdAt: formattedDate,
-      isoDate,
+      createdAt: fmtDate(now),
+      isoDate: now.toISOString().split("T")[0],
       timestamp: Date.now(),
       status: "Најавен",
       warehouseReceived: false,
@@ -725,320 +696,229 @@
       warehouseDriver: "",
       receiverConfirmed: false,
       receiverConfirmedTime: ""
-    };
+    });
 
-    db.ref("transfers").push(newTransfer);
-
-    document.getElementById("docNumber").value = "";
-    document.getElementById("packagesCount").value = "";
-    document.getElementById("driverName").value = "";
+    document.getElementById("docInput").value = "";
+    document.getElementById("pkgInput").value = "";
+    document.getElementById("driverInput").value = "";
   }
 
-  function getFilteredTransfers() {
-    const shopFilter = document.getElementById("filterShop").value;
-    const directionFilter = document.getElementById("filterDirection").value;
-    const dateFrom = document.getElementById("filterDateFrom").value;
-    const dateTo = document.getElementById("filterDateTo").value;
+  function getFilteredList() {
+    const sh = document.getElementById("filterShop").value;
+    const tp = document.getElementById("filterType").value;
+    const df = document.getElementById("dateFrom").value;
+    const dt = document.getElementById("dateTo").value;
 
-    const entries = Object.entries(transfers).map(([id, item]) => ({ id, ...item }));
-    entries.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+    const rows = Object.entries(transfersData).map(([id, v]) => ({ id, ...v }));
+    rows.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 
-    return entries.filter((t) => {
-      // 1. Shop + Direction filtering
-      if (shopFilter) {
-        if (directionFilter === "sent" && t.from !== shopFilter) return false;
-        if (directionFilter === "received" && t.to !== shopFilter) return false;
-        if (directionFilter === "all" && t.from !== shopFilter && t.to !== shopFilter) return false;
+    return rows.filter((t) => {
+      if (sh) {
+        if (tp === "sent" && t.from !== sh) return false;
+        if (tp === "received" && t.to !== sh) return false;
+        if (tp === "all" && t.from !== sh && t.to !== sh) return false;
       } else {
-        // When "Сите продавници" is selected:
-        // "Само испратени" = active/in-progress outgoing transfers (Најавен / Во транзит)
-        // "Само примени" = completed/received transfers (Завршен)
-        if (directionFilter === "sent" && t.status === "Завршен") return false;
-        if (directionFilter === "received" && t.status !== "Завршен") return false;
+        if (tp === "sent" && t.status === "Завршен") return false;
+        if (tp === "received" && t.status !== "Завршен") return false;
       }
 
-      // 2. Date range filtering
-      const rowDate = t.isoDate || extractIsoDate(t.createdAt);
-      if (dateFrom && rowDate && rowDate < dateFrom) return false;
-      if (dateTo && rowDate && rowDate > dateTo) return false;
-
+      const d = t.isoDate || parseDateToIso(t.createdAt);
+      if (df && d && d < df) return false;
+      if (dt && d && d > dt) return false;
       return true;
     });
   }
 
   function renderTable() {
-    const tbody = document.getElementById("transfersBody");
+    const tbody = document.getElementById("tableBody");
     const role = document.getElementById("roleSelect").value;
-    const selectedShop = document.getElementById("filterShop").value;
-    const list = getFilteredTransfers();
+    const chosenShop = document.getElementById("filterShop").value;
+    const list = getFilteredList();
 
-    if (list.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding:20px; color:#64748b;">Нема пронајдено трансфери за избраниот филтер.</td></tr>`;
+    if (!list.length) {
+      tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding:16px; color:#666;">Нема трансфери за избраниот филтер.</td></tr>`;
       return;
     }
 
     tbody.innerHTML = list.map((t) => {
-      const badgeClass =
-        t.status === "Завршен" ? "badge-zavrsen" :
-        t.status === "Во транзит" ? "badge-tranzit" : "badge-najaven";
+      const pillCls =
+        t.status === "Завршен" ? "st-zavrsen" :
+        t.status === "Во транзит" ? "st-tranzit" : "st-najaven";
 
-      // Warehouse controls
-      const canWarehouse = (role === "warehouse" || role === "admin");
-      const whRecHtml = t.warehouseReceived
-        ? `<span style="color:var(--success); font-weight:600;">Примено<br><small>(${escapeHtml(t.warehouseReceivedTime || "")})</small></span>`
-        : (canWarehouse
-            ? `<button class="btn btn-primary" style="padding:4px 8px; font-size:11px;" onclick="markWarehouseReceived('${t.id}')">Прими</button>`
-            : `<span class="locked-note">Се чека магацин</span>`);
+      const isWhRole = (role === "warehouse" || role === "admin");
 
-      const whSentHtml = t.warehouseSent
-        ? `<span style="color:#0284c7; font-weight:600;">Испратено<br><small>${escapeHtml(t.warehouseDriver || "")} (${escapeHtml(t.warehouseSentTime || "")})</small></span>`
-        : (canWarehouse && t.warehouseReceived
-            ? `<button class="btn btn-secondary" style="padding:4px 8px; font-size:11px;" onclick="markWarehouseSent('${t.id}')">Испрати</button>`
-            : `<span class="locked-note">${t.warehouseReceived ? "Се чека испраќање" : "-"}</span>`);
+      const whRecCell = t.warehouseReceived
+        ? `<span style="color:var(--success); font-weight:bold;">Примено</span><span class="hint-small">${esc(t.warehouseReceivedTime || "")}</span>`
+        : (isWhRole
+            ? `<button class="btn btn-pink" style="padding:3px 7px; font-size:11px;" onclick="whRecv('${t.id}')">Прими</button>`
+            : `<span class="hint-small">Се чека магацин</span>`);
 
-      // Strict Receiver Security Logic:
-      // Unlocked ONLY if role is Admin OR (role is Receiver AND selected filter shop matches t.to)
-      const isMatchingReceiver = (role === "receiver" && selectedShop && selectedShop === t.to);
-      const canConfirmReceipt = !t.receiverConfirmed && (role === "admin" || isMatchingReceiver);
+      const whSentCell = t.warehouseSent
+        ? `<span style="color:var(--info); font-weight:bold;">Испратено</span><span class="hint-small">${esc(t.warehouseDriver || "")} (${esc(t.warehouseSentTime || "")})</span>`
+        : (isWhRole && t.warehouseReceived
+            ? `<button class="btn btn-gray" style="padding:3px 7px; font-size:11px;" onclick="whSend('${t.id}')">Испрати</button>`
+            : `<span class="hint-small">${t.warehouseReceived ? "Се чека испраќање" : "-"}</span>`);
 
-      let receiverHtml = "";
+      const allowedReceiver = (role === "receiver" && chosenShop && chosenShop === t.to);
+      const canCheck = !t.receiverConfirmed && (role === "admin" || allowedReceiver);
+
+      let recvCell = "";
       if (t.receiverConfirmed) {
-        receiverHtml = `<span style="color:var(--success); font-weight:700;">✔ Примено<br><small>(${escapeHtml(t.receiverConfirmedTime || "")})</small></span>`;
-      } else if (canConfirmReceipt) {
-        receiverHtml = `
-          <label class="check-label">
-            <input type="checkbox" onchange="confirmReceiver('${t.id}', this)"> Потврди прием
-          </label>
-        `;
+        recvCell = `<span style="color:var(--success); font-weight:bold;">✔ Примено</span><span class="hint-small">${esc(t.receiverConfirmedTime || "")}</span>`;
+      } else if (canCheck) {
+        recvCell = `<label class="check-box"><input type="checkbox" onchange="recConfirm('${t.id}', this)"> Прием</label>`;
       } else {
-        let hint = "Заклучено";
-        if (role === "receiver" && !selectedShop) {
-          hint = "Избери го твојот дуќан во филтерот горе";
-        } else if (role === "receiver" && selectedShop !== t.to) {
-          hint = `Само за: ${escapeHtml(t.to)}`;
-        }
-        receiverHtml = `
-          <label class="check-label" style="opacity:0.55;">
-            <input type="checkbox" disabled> Прием
-          </label>
-          <span class="locked-note">${hint}</span>
-        `;
+        let note = "Заклучено";
+        if (role === "receiver" && !chosenShop) note = "Избери дуќан во филтер";
+        else if (role === "receiver" && chosenShop !== t.to) note = `Само за ${esc(t.to)}`;
+        recvCell = `<label class="check-box" style="opacity:0.5;"><input type="checkbox" disabled> Прием</label><span class="hint-small">${note}</span>`;
       }
 
-      // Actions column
-      const actionsHtml = role === "admin"
-        ? `
-          <div style="display:flex; gap:5px;">
-            <button class="btn btn-edit" onclick="openEditModal('${t.id}')">Уреди</button>
-            <button class="btn btn-danger" onclick="deleteTransfer('${t.id}')">Избриши</button>
-          </div>
-        `
-        : `<span class="locked-note">Увид</span>`;
+      const actCell = role === "admin"
+        ? `<div style="display:flex; gap:4px;"><button class="btn btn-blue" onclick="openEdit('${t.id}')">Уреди</button><button class="btn btn-red" onclick="delTransfer('${t.id}')">Избриши</button></div>`
+        : `<span class="hint-small">Увид</span>`;
 
       return `
         <tr>
-          <td><span class="badge ${badgeClass}">${escapeHtml(t.status || "Најавен")}</span></td>
-          <td><strong>${escapeHtml(t.from || "")}</strong></td>
-          <td><strong>${escapeHtml(t.to || "")}</strong></td>
-          <td>${escapeHtml(t.doc || "")}</td>
-          <td>${escapeHtml(String(t.packages || ""))}</td>
-          <td>${escapeHtml(t.driver || "")}</td>
-          <td>${escapeHtml(t.createdAt || "")}</td>
-          <td>${whRecHtml}</td>
-          <td>${whSentHtml}</td>
-          <td>${receiverHtml}</td>
-          <td>${actionsHtml}</td>
+          <td><span class="status-pill ${pillCls}">${esc(t.status || "Најавен")}</span></td>
+          <td><strong>${esc(t.from || "")}</strong></td>
+          <td><strong>${esc(t.to || "")}</strong></td>
+          <td>${esc(t.doc || "")}</td>
+          <td>${esc(String(t.packages || ""))}</td>
+          <td>${esc(t.driver || "")}</td>
+          <td>${esc(t.createdAt || "")}</td>
+          <td>${whRecCell}</td>
+          <td>${whSentCell}</td>
+          <td>${recvCell}</td>
+          <td>${actCell}</td>
         </tr>
       `;
     }).join("");
   }
 
-  function markWarehouseReceived(id) {
-    const now = formatDateTime(new Date());
+  function whRecv(id) {
     db.ref(`transfers/${id}`).update({
       warehouseReceived: true,
-      warehouseReceivedTime: now,
+      warehouseReceivedTime: fmtDate(new Date()),
       status: "Во транзит"
     });
   }
 
-  function markWarehouseSent(id) {
-    const driver = prompt("Внесете име на возач кој ја презема пратката од магацин:") || "-";
-    const now = formatDateTime(new Date());
+  function whSend(id) {
+    const d = prompt("Возач од магацин:") || "-";
     db.ref(`transfers/${id}`).update({
       warehouseSent: true,
-      warehouseSentTime: now,
-      warehouseDriver: driver,
+      warehouseSentTime: fmtDate(new Date()),
+      warehouseDriver: d,
       status: "Во транзит"
     });
   }
 
-  function confirmReceiver(id, checkbox) {
-    const item = transfers[id];
+  function recConfirm(id, cb) {
+    const item = transfersData[id];
     const role = document.getElementById("roleSelect").value;
-    const selectedShop = document.getElementById("filterShop").value;
+    const chosenShop = document.getElementById("filterShop").value;
 
-    if (role !== "admin" && (!selectedShop || selectedShop !== item.to)) {
-      checkbox.checked = false;
-      alert(`Грешка: Само примачот (${item.to}) може да го потврди овој прием!`);
+    if (role !== "admin" && (!chosenShop || chosenShop !== item.to)) {
+      cb.checked = false;
+      alert(`Само примачот (${item.to}) може да го потврди приемот!`);
       return;
     }
-
-    if (!confirm(`Дали потврдувате дека пратката (Док: ${item.doc}) е примена во ${item.to}? По потврдата полето се заклучува.`)) {
-      checkbox.checked = false;
+    if (!confirm(`Потврдувате прием на документ ${item.doc} во ${item.to}?`)) {
+      cb.checked = false;
       return;
     }
-
-    const now = formatDateTime(new Date());
     db.ref(`transfers/${id}`).update({
       receiverConfirmed: true,
-      receiverConfirmedTime: now,
+      receiverConfirmedTime: fmtDate(new Date()),
       status: "Завршен"
     });
   }
 
-  function deleteTransfer(id) {
+  function delTransfer(id) {
     if (document.getElementById("roleSelect").value !== "admin") return;
-    if (!confirm("Дали сигурно сакате трајно да го избришете овој трансфер?")) return;
+    if (!confirm("Да се избрише трансферот трајно?")) return;
     db.ref(`transfers/${id}`).remove();
   }
 
-  function openEditModal(id) {
-    const t = transfers[id];
+  function openEdit(id) {
+    const t = transfersData[id];
     if (!t) return;
-    document.getElementById("editId").value = id;
+    document.getElementById("editKey").value = id;
     document.getElementById("editFrom").value = t.from || "";
     document.getElementById("editTo").value = t.to || "";
     document.getElementById("editDoc").value = t.doc || "";
-    document.getElementById("editPackages").value = t.packages || 1;
+    document.getElementById("editPkg").value = t.packages || 1;
     document.getElementById("editDriver").value = t.driver || "";
     document.getElementById("editStatus").value = t.status || "Најавен";
     document.getElementById("editModal").classList.add("open");
   }
 
-  function closeEditModal() {
+  function closeEdit() {
     document.getElementById("editModal").classList.remove("open");
   }
 
-  function saveEditModal() {
-    const id = document.getElementById("editId").value;
-    const status = document.getElementById("editStatus").value;
-    const updates = {
+  function saveEdit() {
+    const id = document.getElementById("editKey").value;
+    const st = document.getElementById("editStatus").value;
+    const upd = {
       from: document.getElementById("editFrom").value,
       to: document.getElementById("editTo").value,
       doc: document.getElementById("editDoc").value.trim(),
-      packages: Number(document.getElementById("editPackages").value) || 1,
+      packages: Number(document.getElementById("editPkg").value) || 1,
       driver: document.getElementById("editDriver").value.trim(),
-      status
+      status: st
     };
-    if (status !== "Завршен") {
-      updates.receiverConfirmed = false;
-    }
-    db.ref(`transfers/${id}`).update(updates);
-    closeEditModal();
+    if (st !== "Завршен") upd.receiverConfirmed = false;
+    db.ref(`transfers/${id}`).update(upd);
+    closeEdit();
   }
 
   function updateStats() {
-    const list = Object.values(transfers);
-    document.getElementById("statTotal").textContent = list.length;
-    document.getElementById("statNajaveni").textContent = list.filter(t => t.status === "Најавен").length;
-    document.getElementById("statTranzit").textContent = list.filter(t => t.status === "Во транзит").length;
-    document.getElementById("statZavrseni").textContent = list.filter(t => t.status === "Завршен").length;
+    const arr = Object.values(transfersData);
+    document.getElementById("stTotal").textContent = arr.length;
+    document.getElementById("stNajaveni").textContent = arr.filter(x => x.status === "Најавен").length;
+    document.getElementById("stTranzit").textContent = arr.filter(x => x.status === "Во транзит").length;
+    document.getElementById("stZavrseni").textContent = arr.filter(x => x.status === "Завршен").length;
   }
 
-  // Export current filtered view to Excel (.xls with UTF-8 BOM)
-  function exportToExcel() {
-    const rows = getFilteredTransfers();
-    if (rows.length === 0) {
-      alert("Нема податоци за експортирање во тековниот приказ.");
-      return;
-    }
+  function exportExcel() {
+    const rows = getFilteredList();
+    if (!rows.length) return alert("Нема податоци за експорт.");
 
-    let tableHtml = `
-      <html xmlns:o="urn:schemas-microsoft-com:office:office"
-            xmlns:x="urn:schemas-microsoft-com:office:excel"
-            xmlns="http://www.w3.org/TR/REC-html40">
-      <head><meta charset="UTF-8"></head>
-      <body>
-        <table border="1">
-          <thead>
-            <tr style="background-color:#ff1493; color:#ffffff; font-weight:bold;">
-              <th>Статус</th>
-              <th>Испраќач (Од кого)</th>
-              <th>Примач (Кон кого)</th>
-              <th>Бр. Документ</th>
-              <th>Бр. Пакети</th>
-              <th>Возач</th>
-              <th>Датум на предавање</th>
-              <th>Прием во магацин</th>
-              <th>Испратено од магацин</th>
-              <th>Потврда прием</th>
-            </tr>
-          </thead>
-          <tbody>
-    `;
-
+    let html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><tr><th>Статус</th><th>Испраќач</th><th>Примач</th><th>Бр. Документ</th><th>Бр. Пакети</th><th>Возач</th><th>Датум</th><th>Прием магацин</th><th>Испратено магацин</th><th>Потврда прием</th></tr>`;
     rows.forEach((t) => {
-      const whRec = t.warehouseReceived ? `Примено (${t.warehouseReceivedTime || ""})` : "Не";
-      const whSent = t.warehouseSent ? `Испратено - ${t.warehouseDriver || ""} (${t.warehouseSentTime || ""})` : "Не";
-      const recConf = t.receiverConfirmed ? `Примено (${t.receiverConfirmedTime || ""})` : "Не";
-
-      tableHtml += `
-        <tr>
-          <td>${escapeHtml(t.status || "Најавен")}</td>
-          <td>${escapeHtml(t.from || "")}</td>
-          <td>${escapeHtml(t.to || "")}</td>
-          <td>${escapeHtml(t.doc || "")}</td>
-          <td>${escapeHtml(String(t.packages || ""))}</td>
-          <td>${escapeHtml(t.driver || "")}</td>
-          <td>${escapeHtml(t.createdAt || "")}</td>
-          <td>${escapeHtml(whRec)}</td>
-          <td>${escapeHtml(whSent)}</td>
-          <td>${escapeHtml(recConf)}</td>
-        </tr>
-      `;
+      html += `<tr><td>${esc(t.status || "")}</td><td>${esc(t.from || "")}</td><td>${esc(t.to || "")}</td><td>${esc(t.doc || "")}</td><td>${esc(String(t.packages || ""))}</td><td>${esc(t.driver || "")}</td><td>${esc(t.createdAt || "")}</td><td>${t.warehouseReceived ? "Примено" : "Не"}</td><td>${t.warehouseSent ? "Испратено" : "Не"}</td><td>${t.receiverConfirmed ? "Примено" : "Не"}</td></tr>`;
     });
+    html += `</table></body></html>`;
 
-    tableHtml += `</tbody></table></body></html>`;
-
-    const blob = new Blob(["\uFEFF" + tableHtml], { type: "application/vnd.ms-excel;charset=utf-8;" });
+    const blob = new Blob(["\uFEFF" + html], { type: "application/vnd.ms-excel;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    const today = new Date().toISOString().split("T")[0];
     a.href = url;
-    a.download = `Sara_Fashion_Transferi_${today}.xls`;
+    a.download = `Sara_Fashion_Transferi_${new Date().toISOString().split("T")[0]}.xls`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }
 
-  function formatDateTime(d) {
-    const pad = (n) => String(n).padStart(2, "0");
-    return `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  function fmtDate(d) {
+    const p = (n) => String(n).padStart(2, "0");
+    return `${p(d.getDate())}.${p(d.getMonth() + 1)}.${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`;
   }
 
-  function extractIsoDate(str) {
-    if (!str) return "";
-    // Supports DD.MM.YYYY
-    const m = str.match(/(\d{1,2})\.(\d{1,2})\.(\d{4})/);
-    if (m) {
-      return `${m[3]}-${m[2].padStart(2, "0")}-${m[1].padStart(2, "0")}`;
-    }
-    // Supports MM/DD/YYYY
-    const us = str.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
-    if (us) {
-      return `${us[3]}-${us[1].padStart(2, "0")}-${us[2].padStart(2, "0")}`;
-    }
+  function parseDateToIso(s) {
+    if (!s) return "";
+    const m1 = s.match(/(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+    if (m1) return `${m1[3]}-${m1[2].padStart(2, "0")}-${m1[1].padStart(2, "0")}`;
+    const m2 = s.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+    if (m2) return `${m2[3]}-${m2[1].padStart(2, "0")}-${m2[2].padStart(2, "0")}`;
     return "";
   }
 
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+  function esc(str) {
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 </script>
 </body>
